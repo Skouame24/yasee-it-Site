@@ -1,0 +1,760 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<meta charset="utf-8">
+<title>YASEE Cybersécurité</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+/* Layout: bandes pleine largeur, contenu 1120px ; en-tête collant ; vues par ancre (#accueil, #services, une page par service, #a-propos, #contact) */
+:root{
+  --bg:#ffffff; --surface:#f2f5f8; --surface-2:#e6ecf2; --ink:#10212f; --muted:#4a5a69; --line:#d4dde6;
+  --green:#2a8f39; --green-ink:#1f7a2d; --blue:#0b5cad; --blue-deep:#0c2f52; --on-dark:#ffffff; --on-dark-muted:#c3d3e3; --focus:#0b5cad;
+  --display:'Barlow Semi Condensed','Arial Narrow',Arial,sans-serif;
+  --body:'Source Sans 3','Segoe UI',Arial,sans-serif;
+  --w:1120px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0d1720; --surface:#14222e; --surface-2:#1b2c3a; --ink:#e7eef5; --muted:#a5b5c4; --line:#2a3d4d;
+  --green:#4cbf5d; --green-ink:#6fd17e; --blue:#4b95e0; --blue-deep:#0a2440; --on-dark:#ffffff; --on-dark-muted:#b9cbdd; --focus:#7fb6ee; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0d1720; --surface:#14222e; --surface-2:#1b2c3a; --ink:#e7eef5; --muted:#a5b5c4; --line:#2a3d4d;
+  --green:#4cbf5d; --green-ink:#6fd17e; --blue:#4b95e0; --blue-deep:#0a2440; --on-dark:#ffffff; --on-dark-muted:#b9cbdd; --focus:#7fb6ee; color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+a{color:var(--blue)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.wrap{max-width:var(--w);margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);line-height:1.08;margin:0;text-wrap:balance;color:var(--ink)}
+h1{font-size:clamp(2.3rem,5.2vw,3.7rem);font-weight:800;letter-spacing:-.01em}
+h2{font-size:clamp(1.8rem,3.4vw,2.5rem);font-weight:700}
+h3{font-size:1.3rem;font-weight:700}
+p{margin:0;text-wrap:pretty}
+.eyebrow{font-family:var(--display);font-weight:700;font-size:.92rem;letter-spacing:.12em;text-transform:uppercase;color:var(--green-ink)}
+.lead{font-size:1.15rem;color:var(--muted);max-width:62ch}
+.section{padding-block:clamp(56px,8vw,96px)}
+.section.alt{background:var(--surface)}
+.stack{display:flex;flex-direction:column;gap:16px}
+.head{display:flex;flex-direction:column;gap:12px;max-width:720px;margin-bottom:40px}
+
+/* en-tête */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:72px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.brand img{width:42px;height:43px}
+.brand b{white-space:nowrap;font-family:var(--display);font-weight:800;font-size:1.25rem;letter-spacing:.02em;line-height:1;display:block}
+.brand small{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;align-items:center;gap:4px}
+.nav a{white-space:nowrap;font-weight:600;color:var(--ink);text-decoration:none;padding:10px 12px;border-radius:6px;font-size:.98rem}
+.nav a:hover{background:var(--surface)}
+.nav a[aria-current="page"]{color:var(--blue);box-shadow:inset 0 -3px 0 var(--blue);border-radius:0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 20px;border-radius:6px;font-weight:700;font-size:1rem;text-decoration:none;border:2px solid transparent;cursor:pointer;font-family:var(--body)}
+.btn.primary{background:var(--green);color:#fff}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn.ghost{border-color:var(--line);color:var(--ink);background:transparent}
+.btn.ghost:hover{border-color:var(--ink)}
+.nav .btn{margin-left:8px;color:#fff;padding:0 16px}
+.menu-btn{display:none;background:none;border:1px solid var(--line);border-radius:6px;min-height:44px;min-width:44px;color:var(--ink);cursor:pointer}
+@media (max-width:1080px){
+  .menu-btn{display:inline-flex;align-items:center;justify-content:center}
+  .nav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--bg);border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;padding:8px max(16px,env(safe-area-inset-right,0px)) 16px max(16px,env(safe-area-inset-left,0px))}
+  .nav.open{display:flex}
+  .nav a[aria-current="page"]{box-shadow:inset 3px 0 0 var(--blue)}
+  .nav .btn{margin:8px 0 0}
+}
+
+/* hero */
+.hero{padding-block:clamp(48px,7vw,88px)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:48px;align-items:center}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
+.scale{background:var(--blue-deep);color:var(--on-dark);border-radius:10px;padding:26px 26px 22px;display:flex;flex-direction:column;gap:14px}
+.scale h2{color:var(--on-dark);font-size:1.5rem}
+.scale p{color:var(--on-dark-muted);font-size:.95rem}
+.levels{display:flex;flex-direction:column;gap:6px;margin-top:4px}
+.lvl{display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;align-items:center}
+.lvl i{font-style:normal;font-family:var(--display);font-weight:800;font-size:1.15rem;width:34px;height:34px;display:grid;place-items:center;border-radius:6px;background:rgba(255,255,255,.1);color:var(--on-dark)}
+.lvl:nth-child(5) i{background:#2a8f39}
+.lvl span{font-size:.95rem}
+.lvl span b{font-family:var(--display);font-size:1.05rem;letter-spacing:.02em;margin-right:6px}
+.scale .note{font-size:.8rem;color:var(--on-dark-muted);border-top:1px solid rgba(255,255,255,.18);padding-top:10px}
+@media (max-width:860px){.hero .wrap{grid-template-columns:minmax(0,1fr)}}
+
+/* grilles */
+.grid{display:grid;gap:20px}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:980px){.g4{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){.g4,.g3,.g2{grid-template-columns:minmax(0,1fr)}}
+.risk{border-top:3px solid var(--blue);padding-top:16px;display:flex;flex-direction:column;gap:6px}
+.risk p{color:var(--muted);font-size:.98rem}
+.card{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:24px;display:flex;flex-direction:column;gap:10px}
+.section.alt .card{background:var(--bg)}
+.card p{color:var(--muted);font-size:.98rem}
+.card .deliv{margin-top:auto;padding-top:12px;border-top:1px solid var(--line);font-size:.92rem;color:var(--ink)}
+.card .deliv b{color:var(--green-ink)}
+.card a.more{font-weight:700;text-decoration:none;font-size:.95rem}
+.card a.more:hover{text-decoration:underline}
+
+/* bande indépendance */
+.band{background:var(--blue-deep);color:var(--on-dark)}
+.band .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:48px;align-items:center;padding-block:clamp(48px,7vw,80px)}
+.band h2{color:var(--on-dark)}
+.band p{color:var(--on-dark-muted)}
+.band ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.band li{display:grid;grid-template-columns:24px minmax(0,1fr);gap:12px;color:var(--on-dark)}
+.band li svg{margin-top:4px}
+@media (max-width:860px){.band .wrap{grid-template-columns:minmax(0,1fr)}}
+
+/* démarche */
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;counter-reset:s;border-top:2px solid var(--line)}
+.step{padding:22px 22px 0 0;display:flex;flex-direction:column;gap:8px;position:relative}
+.step::before{counter-increment:s;content:counter(s,decimal-leading-zero);font-family:var(--display);font-weight:800;font-size:2.4rem;color:var(--green);line-height:1}
+.step::after{content:"";position:absolute;top:-2px;left:0;width:48px;height:2px;background:var(--green)}
+.step p{color:var(--muted);font-size:.97rem}
+@media (max-width:860px){.steps{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:28px}}
+@media (max-width:520px){.steps{grid-template-columns:minmax(0,1fr)}}
+
+/* appel diagnostic */
+.cta{background:var(--green);color:#fff}
+.cta .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px;padding-block:44px}
+.cta h2{color:#fff;font-size:clamp(1.6rem,3vw,2.1rem)}
+.cta p{color:#eaf7ec;max-width:60ch;margin-top:6px}
+.cta .btn{background:#fff;color:#1f6e2b}
+.cta .btn:hover{background:#f1fbf2}
+
+/* certifications */
+.certs{display:flex;flex-wrap:wrap;gap:10px}
+.certs span{border:1px solid var(--line);background:var(--bg);border-radius:5px;padding:7px 12px;font-weight:600;font-size:.95rem}
+
+/* services détaillés */
+.svc{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.4fr);gap:40px;padding-block:44px;border-top:1px solid var(--line)}
+.svc:first-of-type{border-top:0}
+.svc .tag{font-family:var(--display);font-weight:800;font-size:1rem;color:var(--green-ink);letter-spacing:.06em}
+.svc ul{margin:0;padding-left:20px;display:grid;gap:6px;color:var(--ink)}
+.svc .cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.svc h4{margin:0 0 6px;font-family:var(--display);font-size:1.05rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+@media (max-width:860px){.svc,.svc .cols{grid-template-columns:minmax(0,1fr);gap:20px}}
+.diag{background:var(--blue-deep);color:var(--on-dark);border-radius:10px;padding:clamp(24px,4vw,40px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:36px}
+.diag h2,.diag h3{color:var(--on-dark)}
+.diag p,.diag li{color:var(--on-dark-muted)}
+.diag ol{margin:0;padding-left:22px;display:grid;gap:8px}
+.diag ol li b{color:var(--on-dark)}
+@media (max-width:860px){.diag{grid-template-columns:minmax(0,1fr)}}
+
+/* conformité */
+.reg{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:24px;padding-block:22px;border-top:1px solid var(--line)}
+.reg:last-child{border-bottom:1px solid var(--line)}
+.reg .who{font-family:var(--display);font-weight:700;font-size:1.15rem}
+.reg .who small{display:block;font-family:var(--body);font-weight:600;font-size:.82rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-top:2px}
+.reg p{color:var(--muted)}
+@media (max-width:700px){.reg{grid-template-columns:minmax(0,1fr);gap:6px}}
+
+/* contact */
+.contact{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.8fr);gap:40px;align-items:start}
+@media (max-width:860px){.contact{grid-template-columns:minmax(0,1fr)}}
+form{display:grid;gap:16px}
+.row2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media (max-width:620px){.row2{grid-template-columns:minmax(0,1fr)}}
+label{font-weight:600;font-size:.95rem;display:flex;flex-direction:column;gap:6px}
+input[type=text],input[type=email],input[type=tel],textarea,select{font:inherit;font-weight:400;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:11px 12px;min-height:46px;width:100%}
+textarea{min-height:120px;resize:vertical}
+fieldset{border:1px solid var(--line);border-radius:6px;padding:14px 16px;margin:0}
+legend{font-weight:600;font-size:.95rem;padding:0 6px}
+.checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 16px}
+@media (max-width:520px){.checks{grid-template-columns:minmax(0,1fr)}}
+.checks label{flex-direction:row;align-items:center;gap:10px;font-weight:400;min-height:36px}
+.checks input{width:18px;height:18px;accent-color:var(--green)}
+.err{color:#b42318;font-size:.9rem;font-weight:600}
+.done{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:20px;display:grid;gap:12px}
+.coord{background:var(--surface);border-radius:8px;padding:24px;display:grid;gap:18px}
+.coord .k{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.coord .v{font-family:var(--display);font-weight:700;font-size:1.35rem;user-select:all;font-variant-numeric:tabular-nums}
+.copy{font:inherit;font-size:.85rem;font-weight:600;background:none;border:1px solid var(--line);color:var(--ink);border-radius:5px;padding:4px 10px;cursor:pointer;min-height:34px}
+
+/* pied */
+footer{background:var(--blue-deep);color:var(--on-dark-muted);font-size:.95rem}
+footer .wrap{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(2,minmax(0,1fr));gap:32px;padding-block:44px}
+footer b{color:var(--on-dark);font-family:var(--display);font-size:1.1rem;letter-spacing:.03em}
+footer a{color:var(--on-dark-muted);text-decoration:none}
+footer a:hover{color:var(--on-dark);text-decoration:underline}
+footer ul{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:6px}
+footer .legal{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.15);padding-top:18px;font-size:.85rem}
+@media (max-width:760px){footer .wrap{grid-template-columns:minmax(0,1fr)}}
+.view[hidden]{display:none!important}
+.vs{border:2px solid var(--blue);border-radius:8px;padding:20px 22px;display:flex;flex-direction:column;gap:10px}
+.vs p{color:var(--muted)}
+.vs p b{color:var(--ink)}
+.vs a{font-weight:700;text-decoration:none}
+.vs a:hover{text-decoration:underline}
+/* sous-menu services */
+.dd{position:relative;display:flex;align-items:center}
+.dd-btn{background:none;border:0;color:var(--ink);cursor:pointer;min-width:32px;min-height:44px;display:grid;place-items:center;border-radius:6px;margin-left:-6px}
+.dd-btn:hover{background:var(--surface)}
+.dd.open .dd-btn svg{transform:rotate(180deg)}
+.dd-menu{display:none;position:absolute;top:100%;left:0;min-width:270px;background:var(--bg);border:1px solid var(--line);border-radius:8px;box-shadow:0 12px 32px rgba(12,47,82,.14);padding:8px;flex-direction:column;z-index:30}
+.dd.open .dd-menu{display:flex}
+@media (hover:hover) and (min-width:1081px){.dd:hover .dd-menu,.dd:focus-within .dd-menu{display:flex}}
+.dd-menu a{padding:10px 12px;border-radius:6px;box-shadow:none!important}
+.dd-menu a[aria-current="page"]{background:var(--surface);color:var(--blue)}
+.dd-sep{height:1px;background:var(--line);margin:6px 4px}
+.nav .dd-top.in{color:var(--blue);box-shadow:inset 0 -3px 0 var(--blue);border-radius:0}
+@media (max-width:1080px){
+  .dd{flex-wrap:wrap}
+  .dd-top{flex:1}
+  .dd-menu{position:static;display:flex;box-shadow:none;border:0;border-left:2px solid var(--line);border-radius:0;margin:0 0 6px 12px;padding:0 0 0 8px;min-width:0;width:100%}
+  .dd-btn{display:none}
+  .nav .dd-top.in{box-shadow:inset 3px 0 0 var(--blue)}
+}
+/* pages service */
+.sp-hero{background:var(--surface);padding-block:clamp(44px,6vw,72px);border-bottom:1px solid var(--line)}
+.sp-hero h1{max-width:20ch}
+.sp-hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
+.crumb{display:flex;gap:8px;flex-wrap:wrap;font-size:.92rem;color:var(--muted);font-weight:600}
+.crumb a{text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.h-sm{font-size:1.55rem}
+.sp-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:48px;align-items:start}
+@media (max-width:860px){.sp-grid{grid-template-columns:minmax(0,1fr)}}
+.when,.dolist{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.when li{padding:12px 16px;background:var(--surface);border-radius:6px}
+.dolist li{padding-left:22px;position:relative}
+.dolist li::before{content:"";position:absolute;left:2px;top:.62em;width:8px;height:8px;border-radius:2px;background:var(--green)}
+.getbox{background:var(--blue-deep);color:var(--on-dark);border-radius:10px;padding:28px;display:flex;flex-direction:column;gap:16px}
+.getbox h2{color:var(--on-dark)}
+.getbox ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.getbox li{display:grid;grid-template-columns:20px minmax(0,1fr);gap:10px;align-items:start}
+.getbox li svg{color:#8fd99a;margin-top:4px}
+.getbox .why{border-top:1px solid rgba(255,255,255,.18);padding-top:16px;display:flex;flex-direction:column;gap:10px}
+.getbox .why .eyebrow{color:#8fd99a}
+.getbox .why ul{padding-left:18px;list-style:disc;color:var(--on-dark-muted)}
+.getbox .why li{display:list-item}
+.others{display:flex;flex-wrap:wrap;gap:10px}
+.others a{border:1px solid var(--line);border-radius:6px;padding:10px 14px;text-decoration:none;font-weight:600;color:var(--ink)}
+.others a:hover{border-color:var(--blue);color:var(--blue)}
+.svc-card{border:1px solid var(--line);border-radius:8px;padding:24px;display:flex;flex-direction:column;gap:10px;text-decoration:none;color:var(--ink);background:var(--bg)}
+.svc-card:hover{border-color:var(--blue)}
+.svc-card p{color:var(--muted);font-size:.98rem}
+.svc-card .more,.diag-card .more{margin-top:auto;font-weight:700;color:var(--blue)}
+.diag-card{display:flex;flex-direction:column;gap:12px;background:var(--blue-deep);color:var(--on-dark);border-radius:10px;padding:clamp(24px,4vw,40px);text-decoration:none}
+.diag-card h2{color:var(--on-dark)}
+.diag-card p{color:var(--on-dark-muted);max-width:62ch}
+.diag-card .more{color:#8fd99a}
+.diag-card:hover{filter:brightness(1.08)}
+
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#accueil" aria-label="YASEE Cybersécurité, accueil">
+      <img src="data:image/png;base64,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" alt="">
+      <span><b>YASEE CYBERSÉCURITÉ</b><small>Une expertise de YASEE IT</small></span>
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav" aria-label="Ouvrir le menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav class="nav" id="nav" aria-label="Navigation principale">
+      <a href="#accueil" data-v="accueil">Accueil</a>
+      <div class="dd" id="dd">
+        <a href="#services" data-v="services" class="dd-top">Nos services</a><button class="dd-btn" id="ddBtn" type="button" aria-expanded="false" aria-controls="ddMenu" aria-label="Afficher les services"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="dd-menu" id="ddMenu"><a href="#diagnostic" data-v="diagnostic">Diagnostic &amp; feuille de route</a><span class="dd-sep" aria-hidden="true"></span><a href="#audit" data-v="audit">Audit de sécurité &amp; conformité</a><a href="#strategie" data-v="strategie">Stratégie &amp; feuille de route</a><a href="#resilience" data-v="resilience">Résilience &amp; continuité</a><a href="#rssi-externalise" data-v="rssi-externalise">RSSI externalisé</a><span class="dd-sep" aria-hidden="true"></span><a href="#tests-intrusion" data-v="tests-intrusion">Tests d’intrusion</a><a href="#formation" data-v="formation">Formation</a></div>
+      </div>
+      <a href="#a-propos" data-v="a-propos">Qui sommes-nous</a>
+      <a href="#contact" data-v="contact">Contact</a>
+      <a class="btn primary" href="#contact">Demander un diagnostic</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<!-- ============ ACCUEIL ============ -->
+<div class="view" id="v-accueil">
+  <section class="hero">
+    <div class="wrap">
+      <div class="stack">
+        <span class="eyebrow">Cabinet de conseil en cybersécurité</span>
+        <h1>Comprendre vos risques. Définir vos priorités. Renforcer votre sécurité.</h1>
+        <p class="lead">Nous aidons les organisations à identifier leurs risques numériques, renforcer leur sécurité informatique et protéger la continuité de leurs activités. Des conseils indépendants, sans produit à vous vendre.</p>
+        <div class="ctas">
+          <a class="btn primary" href="#contact">Demander un diagnostic</a>
+          <a class="btn ghost" href="#services">Découvrir nos services</a>
+        </div>
+      </div>
+      <aside class="scale" aria-labelledby="scaleT">
+        <h2 id="scaleT">Où en est votre entreprise ?</h2>
+        <p>Notre diagnostic situe votre organisation sur cinq niveaux de maturité, puis trace le chemin vers le niveau suivant.</p>
+        <div class="levels">
+          <div class="lvl"><i>1</i><span><b>Initial</b>aucune règle formalisée</span></div>
+          <div class="lvl"><i>2</i><span><b>Réactif</b>on agit après l’incident</span></div>
+          <div class="lvl"><i>3</i><span><b>Structuré</b>règles et responsabilités définies</span></div>
+          <div class="lvl"><i>4</i><span><b>Maîtrisé</b>risques suivis et mesurés</span></div>
+          <div class="lvl"><i>5</i><span><b>Optimisé</b>amélioration continue</span></div>
+        </div>
+        <p class="note">Indicateur interne d’accompagnement, distinct d’une certification officielle.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Pourquoi la cybersécurité vous concerne</span>
+        <h2>Une attaque ne coûte pas seulement des données.</h2>
+        <p class="lead">La cybersécurité protège vos ordinateurs, vos logiciels et vos données contre le vol, la fraude ou le blocage. Faux e-mails, fraudes au virement, rançongiciels : ces attaques ne visent plus seulement les grandes entreprises.</p>
+      </div>
+      <div class="grid g4">
+        <div class="risk"><h3>Arrêt d’activité</h3><p>Systèmes bloqués, ventes et services interrompus pendant des jours.</p></div>
+        <div class="risk"><h3>Pertes financières</h3><p>Fraudes, rançons, coûts de remise en état et manque à gagner.</p></div>
+        <div class="risk"><h3>Sanctions réglementaires</h3><p>Manquements aux obligations de protection des données et de sécurité.</p></div>
+        <div class="risk"><h3>Atteinte à la réputation</h3><p>Confiance perdue de vos clients, partenaires et bailleurs.</p></div>
+      </div>
+      <p style="margin-top:32px;font-weight:700">La bonne nouvelle : des mesures simples et bien choisies réduisent fortement ces risques.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Comment nous pouvons vous aider</span>
+        <h2>Quatre domaines d’intervention</h2>
+      </div>
+      <div class="grid g4">
+        <article class="card"><h3>Audit de sécurité &amp; conformité</h3><p>Vérifier, preuves à l’appui, la conformité et la sécurité d’un périmètre précis.</p><a class="more" href="#audit">En savoir plus →</a><div class="deliv"><b>Livrable :</b> rapport et recommandations priorisées</div></article>
+        <article class="card"><h3>Stratégie &amp; feuille de route</h3><p>Définir vos priorités et structurer la gouvernance de votre sécurité.</p><a class="more" href="#strategie">En savoir plus →</a><div class="deliv"><b>Livrable :</b> plan d’action étape par étape</div></article>
+        <article class="card"><h3>Résilience &amp; continuité</h3><p>Préparer votre organisation à un incident et à la reprise d’activité.</p><a class="more" href="#resilience">En savoir plus →</a><div class="deliv"><b>Livrable :</b> plans de réponse et de reprise</div></article>
+        <article class="card"><h3>RSSI externalisé</h3><p>Un pilotage de la sécurité sans recruter un responsable à temps plein.</p><a class="more" href="#rssi-externalise">En savoir plus →</a><div class="deliv"><b>Livrable :</b> suivi régulier et tableau de bord</div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" aria-labelledby="indT">
+    <div class="wrap">
+      <div class="stack">
+        <span class="eyebrow" style="color:#8fd99a">Un conseil indépendant</span>
+        <h2 id="indT">Nous ne vendons ni logiciel, ni matériel.</h2>
+        <p>Nos recommandations servent uniquement vos intérêts. Vous gardez le choix de vos solutions et de vos fournisseurs.</p>
+      </div>
+      <ul>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8fd99a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Aucune commission de fournisseur ou d’éditeur.</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8fd99a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Des recommandations proportionnées à vos moyens, pas au catalogue d’un vendeur.</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8fd99a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Un regard neutre sur vos prestataires informatiques actuels.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Pourquoi YASEE</span>
+        <h2>Ce qui nous distingue</h2>
+      </div>
+      <div class="grid g4">
+        <div class="risk" style="border-color:var(--green)"><h3>Spécialisés</h3><p>La cybersécurité est notre seul métier : gouvernance, risques, conformité et résilience.</p></div>
+        <div class="risk" style="border-color:var(--green)"><h3>Proches de vous</h3><p>Basés à Abidjan, nous connaissons le contexte, les réglementations et les contraintes des entreprises ivoiriennes.</p></div>
+        <div class="risk" style="border-color:var(--green)"><h3>Indépendants</h3><p>Aucun produit à vendre : seul compte ce qui protège réellement votre activité.</p></div>
+        <div class="risk" style="border-color:var(--green)"><h3>Qualifiés</h3><p>13 ans d’expérience en systèmes d’information et des certifications reconnues : CISM, PMP, ISO/IEC 27001, EBIOS RM.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Notre démarche</span>
+        <h2>Quatre étapes, des résultats concrets</h2>
+      </div>
+      <div class="steps">
+        <div class="step"><h3>Comprendre</h3><p>Votre activité, vos systèmes, vos contraintes et vos obligations.</p></div>
+        <div class="step"><h3>Évaluer</h3><p>Vos pratiques et vos risques, avec un niveau de maturité clair.</p></div>
+        <div class="step"><h3>Prioriser</h3><p>Les actions qui réduisent le plus de risque pour l’effort engagé.</p></div>
+        <div class="step"><h3>Accompagner</h3><p>La mise en œuvre et le suivi dans la durée.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap stack">
+      <span class="eyebrow">Nos certifications</span>
+      <div class="certs">
+        <span>CISM</span><span>PMP</span><span>ISO/IEC 27001 Lead Implementer</span><span>ISO/IEC 27001 Lead Auditor</span><span>ISO/IEC 27005 Lead Risk Manager</span><span>EBIOS Risk Manager</span><span>ISO 31000</span><span>PECB Certified Trainer</span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ SERVICES ============ -->
+<div class="view" id="v-services" hidden>
+  <section class="section">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Nos services</span>
+        <h1>Un premier pas simple, puis un accompagnement à votre rythme</h1>
+        <p class="lead">Tout commence par un diagnostic. Selon vos priorités, nous vous accompagnons ensuite sur un ou plusieurs domaines.</p>
+      </div>
+      <a class="diag-card" href="#diagnostic">
+        <span class="eyebrow" style="color:#8fd99a">Votre premier pas</span>
+        <h2>Diagnostic de cybersécurité &amp; feuille de route</h2>
+        <p>Votre premier pas : une vue claire de votre niveau de sécurité et des actions à engager en priorité. Sur site ou à distance.</p>
+        <span class="more">Découvrir le diagnostic →</span>
+      </a>
+      <h2 class="h-sm" style="margin:48px 0 16px">Nos domaines d’intervention</h2>
+      <div class="grid g4"><a class="svc-card" href="#audit"><h3>Audit de sécurité &amp; conformité</h3><p>Vérifier, preuves à l’appui, la conformité et la sécurité d’un périmètre précis.</p><span class="more">En savoir plus →</span></a><a class="svc-card" href="#strategie"><h3>Stratégie &amp; feuille de route</h3><p>Définir vos priorités et structurer la gouvernance de votre sécurité.</p><span class="more">En savoir plus →</span></a><a class="svc-card" href="#resilience"><h3>Résilience &amp; continuité</h3><p>Préparer votre organisation à un incident et à la reprise d’activité.</p><span class="more">En savoir plus →</span></a><a class="svc-card" href="#rssi-externalise"><h3>RSSI externalisé</h3><p>Un pilotage de la sécurité sans recruter un responsable à temps plein.</p><span class="more">En savoir plus →</span></a></div>
+      <h2 class="h-sm" style="margin:48px 0 16px">Autres services</h2>
+      <div class="grid g2"><a class="svc-card" href="#tests-intrusion"><h3>Tests d’intrusion</h3><p>Vérifier la résistance de vos systèmes face à un attaquant.</p><span class="more">En savoir plus →</span></a><a class="svc-card" href="#formation"><h3>Formation professionnelle</h3><p>Des programmes certifiants ou sur mesure pour vos équipes.</p><span class="more">En savoir plus →</span></a></div>
+    </div>
+  </section>
+</div>
+
+<div class="view" id="v-diagnostic" hidden>
+  <section class="sp-hero">
+    <div class="wrap stack">
+      <nav class="crumb" aria-label="Fil d’Ariane"><a href="#services">Nos services</a><span aria-hidden="true">/</span><span>Votre premier pas</span></nav>
+      <h1>Diagnostic de cybersécurité &amp; feuille de route</h1>
+      <p class="lead">Votre premier pas : une vue claire de votre niveau de sécurité et des actions à engager en priorité. Sur site ou à distance.</p>
+      <div class="ctas"><a class="btn primary" href="#contact">Demander un échange</a><a class="btn ghost" href="#services">Tous nos services</a></div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap sp-grid">
+      <div class="stack" style="gap:36px">
+        <div class="stack"><h2 class="h-sm">Quand en avez-vous besoin ?</h2><ul class="when"><li>Vous ne savez pas par où commencer.</li><li>Un client, un partenaire ou votre groupe vous demande des garanties.</li><li>Vous avez subi un incident ou une tentative de fraude.</li><li>Vous préparez un projet numérique important.</li></ul></div>
+        <div class="stack"><h2 class="h-sm">Ce que nous faisons</h2><ul class="dolist"><li>Cadrage avec la direction : activité, enjeux, périmètre</li><li>Entretiens avec les personnes clés</li><li>Revue de l’organisation, des accès, des sauvegardes, des postes et du réseau</li><li>Analyse des risques au regard de votre activité</li><li>Positionnement sur notre échelle de maturité à 5 niveaux</li><li>Premier état des lieux de vos obligations réglementaires</li></ul></div>
+        <div class="vs"><h3>Diagnostic ou audit ?</h3><p>Le <b>diagnostic</b> donne une vue d’ensemble de votre organisation et vous dit par où commencer. L’<b>audit</b> vérifie en profondeur, preuves à l’appui, un périmètre précis au regard d’un référentiel ou d’une exigence.</p><p><b>Pas d’exigence précise à vérifier ?</b> Commencez par le diagnostic. <b>Une réglementation, un client ou votre groupe vous demande un contrôle ?</b> Choisissez l’audit.</p><a href="#audit">Découvrir l’audit de sécurité &amp; conformité →</a></div>
+      </div>
+      <aside class="getbox"><h2 class="h-sm">Ce que vous recevez</h2><ul><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Un rapport de diagnostic lisible par la direction</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Votre niveau de maturité sur 5 niveaux</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Vos risques prioritaires</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Une feuille de route avec des actions priorisées selon votre contexte</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Une restitution à votre direction</span></li></ul><div class="why"><span class="eyebrow">Vos bénéfices</span><ul><li>Décider en connaissance de cause</li><li>Investir là où le risque est le plus élevé</li><li>Disposer d’un document à présenter à vos partenaires</li></ul></div></aside>
+    </div>
+  </section>
+  <section class="section alt">
+    <div class="wrap">
+      <div class="head"><span class="eyebrow">Comment ça se passe</span><h2>Notre démarche</h2></div>
+      <div class="steps"><div class="step"><h3>Cadrage</h3><p>Objectifs, périmètre et interlocuteurs définis avec la direction.</p></div><div class="step"><h3>Collecte</h3><p>Entretiens, revue documentaire et observations.</p></div><div class="step"><h3>Analyse</h3><p>Risques, écarts et niveau de maturité.</p></div><div class="step"><h3>Restitution</h3><p>Présentation à la direction et remise du rapport.</p></div></div>
+    </div>
+  </section>
+  <section class="cta"><div class="wrap"><div><h2>Parlons de votre situation</h2><p>Un premier échange pour comprendre votre contexte et voir si ce service répond à votre besoin.</p></div><a class="btn" href="#contact">Nous contacter</a></div></section>
+  <section class="section" style="padding-block:44px">
+    <div class="wrap stack"><span class="eyebrow">Nos autres services</span><div class="others"><a href="#audit">Audit de sécurité &amp; conformité</a><a href="#strategie">Stratégie &amp; feuille de route</a><a href="#resilience">Résilience &amp; continuité</a><a href="#rssi-externalise">RSSI externalisé</a><a href="#tests-intrusion">Tests d’intrusion</a><a href="#formation">Formation</a></div></div>
+  </section>
+</div>
+
+<div class="view" id="v-audit" hidden>
+  <section class="sp-hero">
+    <div class="wrap stack">
+      <nav class="crumb" aria-label="Fil d’Ariane"><a href="#services">Nos services</a><span aria-hidden="true">/</span><span>Nos domaines</span></nav>
+      <h1>Audit de sécurité &amp; conformité</h1>
+      <p class="lead">Vérifier, preuves à l’appui, la conformité et la sécurité d’un périmètre précis : un système, une application, un site ou une réglementation.</p>
+      <div class="ctas"><a class="btn primary" href="#contact">Demander un échange</a><a class="btn ghost" href="#services">Tous nos services</a></div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap sp-grid">
+      <div class="stack" style="gap:36px">
+        <div class="stack"><h2 class="h-sm">Quand en avez-vous besoin ?</h2><ul class="when"><li>Vous préparez un audit externe ou une inspection.</li><li>Votre organisation ou votre informatique a beaucoup changé.</li><li>Vous voulez vérifier le travail d’un prestataire.</li><li>Un client, votre groupe ou un régulateur exige un contrôle.</li></ul></div>
+        <div class="stack"><h2 class="h-sm">Ce que nous faisons</h2><ul class="dolist"><li>Audit de sécurité organisationnel et technique</li><li>Audit de conformité : RGSSI, protection des données, exigences de votre secteur, ISO/IEC 27001</li><li>Revue des droits d’accès, des sauvegardes et des configurations clés</li><li>Contrôle des prestataires informatiques</li></ul></div>
+        <div class="vs"><h3>Diagnostic ou audit ?</h3><p>Le <b>diagnostic</b> donne une vue d’ensemble de votre organisation et vous dit par où commencer. L’<b>audit</b> vérifie en profondeur, preuves à l’appui, un périmètre précis au regard d’un référentiel ou d’une exigence.</p><p><b>Pas d’exigence précise à vérifier ?</b> Commencez par le diagnostic. <b>Une réglementation, un client ou votre groupe vous demande un contrôle ?</b> Choisissez l’audit.</p><a href="#diagnostic">Découvrir le diagnostic →</a></div>
+      </div>
+      <aside class="getbox"><h2 class="h-sm">Ce que vous recevez</h2><ul><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Un rapport d’audit clair</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Les écarts classés par niveau de risque</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Des recommandations priorisées</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Une synthèse pour la direction</span></li></ul><div class="why"><span class="eyebrow">Vos bénéfices</span><ul><li>Connaître votre situation réelle, pas supposée</li><li>Aborder un audit externe sereinement</li><li>Corriger d’abord ce qui expose le plus</li></ul></div></aside>
+    </div>
+  </section>
+  <section class="section alt">
+    <div class="wrap">
+      <div class="head"><span class="eyebrow">Comment ça se passe</span><h2>Notre démarche</h2></div>
+      <div class="steps"><div class="step"><h3>Périmètre</h3><p>Choix du périmètre et du référentiel d’audit.</p></div><div class="step"><h3>Preuves</h3><p>Entretiens, documents et vérifications sur les systèmes.</p></div><div class="step"><h3>Écarts</h3><p>Analyse et classement des écarts par niveau de risque.</p></div><div class="step"><h3>Rapport</h3><p>Restitution et recommandations priorisées.</p></div></div>
+    </div>
+  </section>
+  <section class="cta"><div class="wrap"><div><h2>Parlons de votre situation</h2><p>Un premier échange pour comprendre votre contexte et voir si ce service répond à votre besoin.</p></div><a class="btn" href="#contact">Nous contacter</a></div></section>
+  <section class="section" style="padding-block:44px">
+    <div class="wrap stack"><span class="eyebrow">Nos autres services</span><div class="others"><a href="#diagnostic">Diagnostic &amp; feuille de route</a><a href="#strategie">Stratégie &amp; feuille de route</a><a href="#resilience">Résilience &amp; continuité</a><a href="#rssi-externalise">RSSI externalisé</a><a href="#tests-intrusion">Tests d’intrusion</a><a href="#formation">Formation</a></div></div>
+  </section>
+</div>
+
+<div class="view" id="v-strategie" hidden>
+  <section class="sp-hero">
+    <div class="wrap stack">
+      <nav class="crumb" aria-label="Fil d’Ariane"><a href="#services">Nos services</a><span aria-hidden="true">/</span><span>Nos domaines</span></nav>
+      <h1>Stratégie &amp; feuille de route</h1>
+      <p class="lead">Définir vos priorités, structurer la gouvernance de votre sécurité et répondre à vos obligations.</p>
+      <div class="ctas"><a class="btn primary" href="#contact">Demander un échange</a><a class="btn ghost" href="#services">Tous nos services</a></div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap sp-grid">
+      <div class="stack" style="gap:36px">
+        <div class="stack"><h2 class="h-sm">Quand en avez-vous besoin ?</h2><ul class="when"><li>La sécurité est gérée au cas par cas.</li><li>Vous n’avez pas de politique de sécurité formalisée.</li><li>Vos obligations réglementaires sont mal connues.</li><li>Vous devez justifier un budget sécurité.</li></ul></div>
+        <div class="stack"><h2 class="h-sm">Ce que nous faisons</h2><ul class="dolist"><li>Analyse des risques au regard de vos enjeux métier</li><li>Politique de sécurité et procédures</li><li>Mise en place et gestion du SMSI</li><li>Conformité réglementaire : RGSSI, protection des données, exigences de votre secteur</li><li>Rôles, responsabilités et comité de suivi</li><li>Indicateurs et tableau de bord</li></ul></div>
+      </div>
+      <aside class="getbox"><h2 class="h-sm">Ce que vous recevez</h2><ul><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Une feuille de route claire</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Des actions priorisées selon votre contexte, vos risques et vos moyens</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Des politiques et procédures prêtes à adopter</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Des indicateurs de suivi</span></li></ul><div class="why"><span class="eyebrow">Vos bénéfices</span><ul><li>Une sécurité pilotée, plus subie</li><li>Des investissements justifiés auprès de la direction</li><li>Une conformité organisée dans la durée</li></ul></div></aside>
+    </div>
+  </section>
+  <section class="section alt">
+    <div class="wrap">
+      <div class="head"><span class="eyebrow">Comment ça se passe</span><h2>Notre démarche</h2></div>
+      <div class="steps"><div class="step"><h3>Enjeux</h3><p>Comprendre votre activité et vos objectifs.</p></div><div class="step"><h3>Risques</h3><p>Identifier et évaluer les risques prioritaires.</p></div><div class="step"><h3>Cible</h3><p>Définir le niveau visé et les priorités.</p></div><div class="step"><h3>Feuille de route</h3><p>Formaliser et partager le plan d’action.</p></div></div>
+    </div>
+  </section>
+  <section class="cta"><div class="wrap"><div><h2>Parlons de votre situation</h2><p>Un premier échange pour comprendre votre contexte et voir si ce service répond à votre besoin.</p></div><a class="btn" href="#contact">Nous contacter</a></div></section>
+  <section class="section" style="padding-block:44px">
+    <div class="wrap stack"><span class="eyebrow">Nos autres services</span><div class="others"><a href="#diagnostic">Diagnostic &amp; feuille de route</a><a href="#audit">Audit de sécurité &amp; conformité</a><a href="#resilience">Résilience &amp; continuité</a><a href="#rssi-externalise">RSSI externalisé</a><a href="#tests-intrusion">Tests d’intrusion</a><a href="#formation">Formation</a></div></div>
+  </section>
+</div>
+
+<div class="view" id="v-resilience" hidden>
+  <section class="sp-hero">
+    <div class="wrap stack">
+      <nav class="crumb" aria-label="Fil d’Ariane"><a href="#services">Nos services</a><span aria-hidden="true">/</span><span>Nos domaines</span></nav>
+      <h1>Résilience &amp; continuité</h1>
+      <p class="lead">Préparer votre organisation à un incident et à une reprise rapide de l’activité.</p>
+      <div class="ctas"><a class="btn primary" href="#contact">Demander un échange</a><a class="btn ghost" href="#services">Tous nos services</a></div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap sp-grid">
+      <div class="stack" style="gap:36px">
+        <div class="stack"><h2 class="h-sm">Quand en avez-vous besoin ?</h2><ul class="when"><li>Personne ne sait quoi faire si vos systèmes sont bloqués.</li><li>Vos sauvegardes n’ont jamais été testées en restauration.</li><li>Votre activité ne peut pas s’arrêter plusieurs jours.</li><li>Votre secteur exige un plan de continuité.</li></ul></div>
+        <div class="stack"><h2 class="h-sm">Ce que nous faisons</h2><ul class="dolist"><li>Analyse d’impact sur l’activité</li><li>Plan de continuité d’activité</li><li>Plan de reprise informatique</li><li>Plan de réponse aux incidents</li><li>Exercices de crise et tests de restauration</li><li>Sensibilisation des équipes aux bons réflexes</li></ul></div>
+      </div>
+      <aside class="getbox"><h2 class="h-sm">Ce que vous recevez</h2><ul><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Des plans documentés et testés</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Des rôles et contacts clairs en cas de crise</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Un rapport d’exercice</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Des axes d’amélioration</span></li></ul><div class="why"><span class="eyebrow">Vos bénéfices</span><ul><li>Réduire la durée d’interruption</li><li>Limiter les pertes en cas d’attaque</li><li>Rassurer vos clients et partenaires</li></ul></div></aside>
+    </div>
+  </section>
+  <section class="section alt">
+    <div class="wrap">
+      <div class="head"><span class="eyebrow">Comment ça se passe</span><h2>Notre démarche</h2></div>
+      <div class="steps"><div class="step"><h3>Activités essentielles</h3><p>Identifier ce qui ne doit pas s’arrêter.</p></div><div class="step"><h3>Stratégies</h3><p>Définir comment continuer et redémarrer.</p></div><div class="step"><h3>Plans</h3><p>Rédiger des plans simples et opérationnels.</p></div><div class="step"><h3>Exercices</h3><p>Tester, mesurer et améliorer.</p></div></div>
+    </div>
+  </section>
+  <section class="cta"><div class="wrap"><div><h2>Parlons de votre situation</h2><p>Un premier échange pour comprendre votre contexte et voir si ce service répond à votre besoin.</p></div><a class="btn" href="#contact">Nous contacter</a></div></section>
+  <section class="section" style="padding-block:44px">
+    <div class="wrap stack"><span class="eyebrow">Nos autres services</span><div class="others"><a href="#diagnostic">Diagnostic &amp; feuille de route</a><a href="#audit">Audit de sécurité &amp; conformité</a><a href="#strategie">Stratégie &amp; feuille de route</a><a href="#rssi-externalise">RSSI externalisé</a><a href="#tests-intrusion">Tests d’intrusion</a><a href="#formation">Formation</a></div></div>
+  </section>
+</div>
+
+<div class="view" id="v-rssi-externalise" hidden>
+  <section class="sp-hero">
+    <div class="wrap stack">
+      <nav class="crumb" aria-label="Fil d’Ariane"><a href="#services">Nos services</a><span aria-hidden="true">/</span><span>Nos domaines</span></nav>
+      <h1>RSSI externalisé</h1>
+      <p class="lead">Un responsable de la sécurité à vos côtés, sans recruter à temps plein.</p>
+      <div class="ctas"><a class="btn primary" href="#contact">Demander un échange</a><a class="btn ghost" href="#services">Tous nos services</a></div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap sp-grid">
+      <div class="stack" style="gap:36px">
+        <div class="stack"><h2 class="h-sm">Quand en avez-vous besoin ?</h2><ul class="when"><li>Vous n’avez pas de responsable sécurité.</li><li>Votre équipe informatique est seule face aux sujets de sécurité.</li><li>Vous avez besoin d’un interlocuteur face à la direction, aux clients ou aux régulateurs.</li><li>Vous êtes entre deux responsables sécurité.</li></ul></div>
+        <div class="stack"><h2 class="h-sm">Ce que nous faisons</h2><ul class="dolist"><li>Pilotage du programme de sécurité</li><li>Suivi des risques et de la conformité</li><li>Rédaction et mise à jour des politiques</li><li>Conseil à la direction et participation aux comités</li><li>Relation avec vos prestataires</li><li>Appui à la coordination en cas d’incident</li></ul></div>
+      </div>
+      <aside class="getbox"><h2 class="h-sm">Ce que vous recevez</h2><ul><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Un interlocuteur sécurité dédié</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Un tableau de bord régulier</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Des comptes rendus de suivi</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Des points planifiés avec la direction</span></li></ul><div class="why"><span class="eyebrow">Vos bénéfices</span><ul><li>Une compétence de haut niveau à coût maîtrisé</li><li>Une sécurité suivie dans la durée</li><li>Un volume d’intervention adapté à vos besoins</li></ul></div></aside>
+    </div>
+  </section>
+  <section class="section alt">
+    <div class="wrap">
+      <div class="head"><span class="eyebrow">Comment ça se passe</span><h2>Notre démarche</h2></div>
+      <div class="steps"><div class="step"><h3>Prise de connaissance</h3><p>Votre organisation, vos risques, vos projets.</p></div><div class="step"><h3>Plan de travail</h3><p>Priorités et rythme d’intervention définis ensemble.</p></div><div class="step"><h3>Suivi</h3><p>Points réguliers et pilotage des actions.</p></div><div class="step"><h3>Bilan</h3><p>Mesure des progrès et ajustement.</p></div></div>
+    </div>
+  </section>
+  <section class="cta"><div class="wrap"><div><h2>Parlons de votre situation</h2><p>Un premier échange pour comprendre votre contexte et voir si ce service répond à votre besoin.</p></div><a class="btn" href="#contact">Nous contacter</a></div></section>
+  <section class="section" style="padding-block:44px">
+    <div class="wrap stack"><span class="eyebrow">Nos autres services</span><div class="others"><a href="#diagnostic">Diagnostic &amp; feuille de route</a><a href="#audit">Audit de sécurité &amp; conformité</a><a href="#strategie">Stratégie &amp; feuille de route</a><a href="#resilience">Résilience &amp; continuité</a><a href="#tests-intrusion">Tests d’intrusion</a><a href="#formation">Formation</a></div></div>
+  </section>
+</div>
+
+<div class="view" id="v-tests-intrusion" hidden>
+  <section class="sp-hero">
+    <div class="wrap stack">
+      <nav class="crumb" aria-label="Fil d’Ariane"><a href="#services">Nos services</a><span aria-hidden="true">/</span><span>Autres services</span></nav>
+      <h1>Tests d’intrusion</h1>
+      <p class="lead">Vérifier, en conditions réelles, la résistance de vos systèmes face à un attaquant.</p>
+      <div class="ctas"><a class="btn primary" href="#contact">Demander un échange</a><a class="btn ghost" href="#services">Tous nos services</a></div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap sp-grid">
+      <div class="stack" style="gap:36px">
+        <div class="stack"><h2 class="h-sm">Quand en avez-vous besoin ?</h2><ul class="when"><li>Vous mettez en ligne un site ou une application.</li><li>Un client ou un partenaire l’exige.</li><li>Vous voulez vérifier que des corrections sont efficaces.</li><li>Vos systèmes sont exposés sur Internet.</li></ul></div>
+        <div class="stack"><h2 class="h-sm">Ce que nous faisons</h2><ul class="dolist"><li>Tests externes des systèmes exposés sur Internet</li><li>Tests internes de votre réseau</li><li>Tests d’applications web et mobiles</li><li>Interventions encadrées par une autorisation écrite et un périmètre convenu</li></ul></div>
+      </div>
+      <aside class="getbox"><h2 class="h-sm">Ce que vous recevez</h2><ul><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Un rapport technique détaillé</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Une synthèse pour la direction</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Les vulnérabilités classées par criticité</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Un plan de correction priorisé</span></li></ul><div class="why"><span class="eyebrow">Vos bénéfices</span><ul><li>Découvrir vos failles avant un attaquant</li><li>Prouver votre niveau de sécurité à vos clients</li><li>Vérifier l’efficacité de vos corrections</li></ul></div></aside>
+    </div>
+  </section>
+  <section class="section alt">
+    <div class="wrap">
+      <div class="head"><span class="eyebrow">Comment ça se passe</span><h2>Notre démarche</h2></div>
+      <div class="steps"><div class="step"><h3>Cadrage</h3><p>Périmètre, règles et autorisation écrite.</p></div><div class="step"><h3>Tests</h3><p>Recherche et exploitation contrôlée des failles.</p></div><div class="step"><h3>Rapport</h3><p>Vulnérabilités classées par criticité.</p></div><div class="step"><h3>Restitution</h3><p>Plan de correction et contre-test si souhaité.</p></div></div>
+    </div>
+  </section>
+  <section class="cta"><div class="wrap"><div><h2>Parlons de votre situation</h2><p>Un premier échange pour comprendre votre contexte et voir si ce service répond à votre besoin.</p></div><a class="btn" href="#contact">Nous contacter</a></div></section>
+  <section class="section" style="padding-block:44px">
+    <div class="wrap stack"><span class="eyebrow">Nos autres services</span><div class="others"><a href="#diagnostic">Diagnostic &amp; feuille de route</a><a href="#audit">Audit de sécurité &amp; conformité</a><a href="#strategie">Stratégie &amp; feuille de route</a><a href="#resilience">Résilience &amp; continuité</a><a href="#rssi-externalise">RSSI externalisé</a><a href="#formation">Formation</a></div></div>
+  </section>
+</div>
+
+<div class="view" id="v-formation" hidden>
+  <section class="sp-hero">
+    <div class="wrap stack">
+      <nav class="crumb" aria-label="Fil d’Ariane"><a href="#services">Nos services</a><span aria-hidden="true">/</span><span>Autres services</span></nav>
+      <h1>Formation professionnelle</h1>
+      <p class="lead">Former vos équipes et sensibiliser vos collaborateurs, avec des programmes certifiants ou sur mesure.</p>
+      <div class="ctas"><a class="btn primary" href="#contact">Demander un échange</a><a class="btn ghost" href="#services">Tous nos services</a></div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap sp-grid">
+      <div class="stack" style="gap:36px">
+        <div class="stack"><h2 class="h-sm">Quand en avez-vous besoin ?</h2><ul class="when"><li>Vos équipes informatiques doivent monter en compétence.</li><li>Vos collaborateurs sont exposés aux faux e-mails et aux fraudes.</li><li>Un collaborateur prépare une certification professionnelle.</li><li>Vous devez démontrer des actions de sensibilisation.</li></ul></div>
+        <div class="stack"><h2 class="h-sm">Ce que nous faisons</h2><ul class="dolist"><li>Préparation aux certifications : ISO/IEC 27001, ISO/IEC 27005, EBIOS Risk Manager, gestion des risques</li><li>Programmes sur mesure pour vos équipes informatiques</li><li>Sensibilisation des collaborateurs adaptée à vos métiers</li><li>Ateliers pour les dirigeants</li></ul></div>
+      </div>
+      <aside class="getbox"><h2 class="h-sm">Ce que vous recevez</h2><ul><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Un programme adapté à vos objectifs</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Des supports de formation</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Une attestation de participation</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Un bilan de la formation</span></li></ul><div class="why"><span class="eyebrow">Vos bénéfices</span><ul><li>Des équipes plus autonomes</li><li>Moins d’incidents liés aux erreurs humaines</li><li>Des compétences reconnues</li></ul></div></aside>
+    </div>
+  </section>
+  <section class="section alt">
+    <div class="wrap">
+      <div class="head"><span class="eyebrow">Comment ça se passe</span><h2>Notre démarche</h2></div>
+      <div class="steps"><div class="step"><h3>Besoins</h3><p>Publics, objectifs et niveau de départ.</p></div><div class="step"><h3>Programme</h3><p>Contenu et cas pratiques adaptés.</p></div><div class="step"><h3>Animation</h3><p>En présentiel ou à distance.</p></div><div class="step"><h3>Évaluation</h3><p>Mesure des acquis et bilan.</p></div></div>
+    </div>
+  </section>
+  <section class="cta"><div class="wrap"><div><h2>Parlons de votre situation</h2><p>Un premier échange pour comprendre votre contexte et voir si ce service répond à votre besoin.</p></div><a class="btn" href="#contact">Nous contacter</a></div></section>
+  <section class="section" style="padding-block:44px">
+    <div class="wrap stack"><span class="eyebrow">Nos autres services</span><div class="others"><a href="#diagnostic">Diagnostic &amp; feuille de route</a><a href="#audit">Audit de sécurité &amp; conformité</a><a href="#strategie">Stratégie &amp; feuille de route</a><a href="#resilience">Résilience &amp; continuité</a><a href="#rssi-externalise">RSSI externalisé</a><a href="#tests-intrusion">Tests d’intrusion</a></div></div>
+  </section>
+</div>
+
+<!-- ============ À PROPOS ============ -->
+<div class="view" id="v-a-propos" hidden>
+  <section class="section">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Qui sommes-nous</span>
+        <h1>YASEE Cybersécurité, le pôle conseil en cybersécurité de YASEE IT</h1>
+        <p class="lead">Nous accompagnons les dirigeants et les équipes informatiques qui veulent protéger leur activité sans se perdre dans la technique. Notre rôle : traduire les risques numériques en décisions claires, puis aider à les mettre en œuvre.</p>
+      </div>
+      <div class="grid g3">
+        <div class="card"><h3>Notre conviction</h3><p>La cybersécurité n’est pas réservée aux grandes entreprises. Une démarche bien dimensionnée protège efficacement une organisation de toute taille.</p></div>
+        <div class="card"><h3>Notre manière de travailler</h3><p>Un langage clair, des priorités assumées et des recommandations à la mesure de vos moyens.</p></div>
+        <div class="card"><h3>Notre engagement</h3><p>Un conseil indépendant, la confidentialité de vos informations et un suivi dans la durée.</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="section alt">
+    <div class="wrap">
+      <div class="head"><span class="eyebrow">Nos compétences</span><h2>13 ans d’expérience en systèmes d’information et cybersécurité</h2></div>
+      <div class="grid g3">
+        <div class="card"><h3>Gouvernance &amp; conformité</h3><p>Gestion du SMSI, politiques et procédures, conformité au référentiel national (RGSSI).</p></div>
+        <div class="card"><h3>Analyse des risques</h3><p>Identifier, évaluer et traiter les risques au regard de vos enjeux métier.</p></div>
+        <div class="card"><h3>Audit de sécurité</h3><p>Audits de sécurité et de conformité, fondés sur des preuves.</p></div>
+        <div class="card"><h3>Gestion de crise &amp; résilience</h3><p>Préparation aux incidents, appui à la coordination de crise et à la reprise d’activité.</p></div>
+        <div class="card"><h3>Pilotage de projets</h3><p>Programmes de sécurité pilotés de bout en bout : délais, budget, acteurs.</p></div>
+        <div class="card"><h3>Formation &amp; sensibilisation</h3><p>Formation des équipes informatiques et sensibilisation des collaborateurs.</p></div>
+      </div>
+      <div class="stack" style="margin-top:44px">
+        <span class="eyebrow">Nos certifications</span>
+        <div class="certs"><span>CISM</span><span>PMP</span><span>ISO/IEC 27001 Lead Implementer</span><span>ISO/IEC 27001 Lead Auditor</span><span>ISO/IEC 27005 Lead Risk Manager</span><span>EBIOS Risk Manager</span><span>ISO 31000</span><span>PECB Certified Trainer</span></div>
+      </div>
+    </div>
+  </section>
+  <section class="cta"><div class="wrap"><div><h2>Parlons de vos enjeux de cybersécurité</h2><p>Un premier échange pour comprendre votre contexte et identifier les actions utiles.</p></div><a class="btn" href="#contact">Nous contacter</a></div></section>
+</div>
+
+<!-- ============ CONTACT ============ -->
+<div class="view" id="v-contact" hidden>
+  <section class="section">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Contact</span>
+        <h1>Demander un diagnostic ou un premier échange</h1>
+        <p class="lead">Décrivez-nous votre situation en quelques lignes. Nous revenons vers vous pour convenir d’un rendez-vous.</p>
+      </div>
+      <div class="contact">
+        <div>
+          <form id="form" novalidate>
+            <div class="row2">
+              <label for="f-nom">Nom et prénom<input type="text" id="f-nom" autocomplete="name" required></label>
+              <label for="f-ent">Entreprise<input type="text" id="f-ent" autocomplete="organization" required></label>
+            </div>
+            <div class="row2">
+              <label for="f-mail">E-mail professionnel<input type="email" id="f-mail" autocomplete="email" required></label>
+              <label for="f-tel">Téléphone<input type="tel" id="f-tel" autocomplete="tel"></label>
+            </div>
+            <label for="f-ville">Ville<input type="text" id="f-ville" placeholder="Abidjan, Bouaké, San Pedro…"></label>
+            <fieldset>
+              <legend>Ce qui vous intéresse</legend>
+              <div class="checks">
+                <label for="c1"><input type="checkbox" id="c1" value="Diagnostic &amp; feuille de route" checked>Diagnostic &amp; feuille de route</label>
+                <label for="c2"><input type="checkbox" id="c2" value="Audit de sécurité &amp; conformité">Audit de sécurité &amp; conformité</label>
+                <label for="c3"><input type="checkbox" id="c3" value="Stratégie &amp; feuille de route">Stratégie &amp; feuille de route</label>
+                <label for="c4"><input type="checkbox" id="c4" value="Résilience &amp; continuité">Résilience &amp; continuité</label>
+                <label for="c5"><input type="checkbox" id="c5" value="RSSI externalisé">RSSI externalisé</label>
+                <label for="c6"><input type="checkbox" id="c6" value="Tests d’intrusion">Tests d’intrusion</label>
+                <label for="c7"><input type="checkbox" id="c7" value="Formation">Formation</label>
+              </div>
+            </fieldset>
+            <label for="f-msg">Votre message<textarea id="f-msg" placeholder="Votre activité, votre besoin, vos échéances…"></textarea></label>
+            <p class="err" id="err" hidden>Merci d’indiquer votre nom, votre entreprise et une adresse e-mail valide.</p>
+            <div><button class="btn primary" type="submit">Envoyer ma demande</button></div>
+          </form>
+          <div class="done" id="done" hidden>
+            <h3>Votre demande est prête</h3>
+            <p style="color:var(--muted)">Sur cette maquette, le formulaire n’est pas encore relié à une messagerie. Copiez le récapitulatif et envoyez-le à info@yasee-it.ci.</p>
+            <textarea id="recap" readonly></textarea>
+            <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="copy" type="button" id="copyRecap">Copier le récapitulatif</button><button class="copy" type="button" id="again">Modifier la demande</button></div>
+          </div>
+        </div>
+        <aside class="coord">
+          <div><div class="k">Téléphone</div><div class="v" id="tel">(+225) 07 11 444 588</div><button class="copy" type="button" data-copy="tel">Copier</button></div>
+          <div><div class="k">E-mail</div><div class="v" id="mail">info@yasee-it.ci</div><button class="copy" type="button" data-copy="mail">Copier</button></div>
+          <div><div class="k">Basés à</div><div class="v" style="user-select:auto">Abidjan, Côte d’Ivoire</div><p style="color:var(--muted);font-size:.95rem">Interventions sur site ou à distance.</p></div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="stack" style="gap:8px"><b>YASEE CYBERSÉCURITÉ</b><p>Conseil indépendant en cybersécurité, gouvernance, risques et conformité. Une expertise de YASEE IT.</p></div>
+    <div><b>Services</b><ul><li><a href="#diagnostic">Diagnostic &amp; feuille de route</a></li><li><a href="#audit">Audit de sécurité &amp; conformité</a></li><li><a href="#strategie">Stratégie &amp; feuille de route</a></li><li><a href="#resilience">Résilience &amp; continuité</a></li><li><a href="#rssi-externalise">RSSI externalisé</a></li><li><a href="#tests-intrusion">Tests d’intrusion</a></li><li><a href="#formation">Formation</a></li></ul></div>
+    <div><b>Contact</b><ul><li>(+225) 07 11 444 588</li><li>info@yasee-it.ci</li><li>Abidjan, Côte d’Ivoire</li><li><a href="#a-propos">Qui sommes-nous</a></li></ul></div>
+    <div class="legal">© YASEE IT · yasee-it.ci</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var views=["accueil", "services", "diagnostic", "audit", "strategie", "resilience", "rssi-externalise", "tests-intrusion", "formation", "a-propos", "contact"];
+  var nav=document.getElementById('nav'),btn=document.getElementById('menuBtn');
+  function show(){
+    var h=(location.hash||'').slice(1); if(views.indexOf(h)<0) h='accueil';
+    views.forEach(function(v){document.getElementById('v-'+v).hidden=(v!==h)});
+    var svc=["diagnostic", "audit", "strategie", "resilience", "rssi-externalise", "tests-intrusion", "formation"];nav.querySelectorAll('a[data-v]').forEach(function(a){ if(a.dataset.v===h) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current')});document.querySelector('.dd-top').classList.toggle('in',h==='services'||svc.indexOf(h)>=0);dd.classList.remove('open');ddBtn.setAttribute('aria-expanded','false');
+    nav.classList.remove('open'); btn.setAttribute('aria-expanded','false');
+    window.scrollTo(0,0);
+  }
+  var dd=document.getElementById('dd'),ddBtn=document.getElementById('ddBtn');
+  ddBtn.addEventListener('click',function(e){e.stopPropagation();var o=dd.classList.toggle('open');ddBtn.setAttribute('aria-expanded',o?'true':'false')});
+  document.addEventListener('click',function(e){if(!dd.contains(e.target)){dd.classList.remove('open');ddBtn.setAttribute('aria-expanded','false')}});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&dd.classList.contains('open')){dd.classList.remove('open');ddBtn.setAttribute('aria-expanded','false');ddBtn.focus()}});
+  window.addEventListener('hashchange',show); show();
+  btn.addEventListener('click',function(){var o=nav.classList.toggle('open'); btn.setAttribute('aria-expanded',o?'true':'false')});
+
+  function copy(text,b){var lab=b.textContent;function ok(){b.textContent='Copié';setTimeout(function(){b.textContent=lab},1600)}
+    try{navigator.clipboard.writeText(text).then(ok,function(){b.textContent='Sélectionnez le texte'})}catch(e){b.textContent='Sélectionnez le texte'}}
+  document.querySelectorAll('[data-copy]').forEach(function(b){b.addEventListener('click',function(){copy(document.getElementById(b.dataset.copy).textContent,b)})});
+
+  var form=document.getElementById('form'),done=document.getElementById('done'),err=document.getElementById('err');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var g=function(id){return document.getElementById(id).value.trim()};
+    var mail=g('f-mail');
+    if(!g('f-nom')||!g('f-ent')||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(mail)){err.hidden=false;return}
+    err.hidden=true;
+    var s=[].slice.call(form.querySelectorAll('.checks input:checked')).map(function(i){return i.value});
+    document.getElementById('recap').value='Demande de contact – YASEE Cybersécurité\n\nNom : '+g('f-nom')+'\nEntreprise : '+g('f-ent')+'\nE-mail : '+mail+'\nTéléphone : '+(g('f-tel')||'—')+'\nVille : '+(g('f-ville')||'—')+'\nIntérêt : '+(s.join(', ')||'—')+'\n\nMessage :\n'+(g('f-msg')||'—');
+    form.hidden=true;done.hidden=false;
+  });
+  document.getElementById('copyRecap').addEventListener('click',function(){var t=document.getElementById('recap');copy(t.value,this);t.select()});
+  document.getElementById('again').addEventListener('click',function(){done.hidden=true;form.hidden=false});
+})();
+</script>
+
+</body></html>
