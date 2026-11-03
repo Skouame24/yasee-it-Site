@@ -1102,122 +1102,124 @@ export default function Home() {
             className={`main-nav ${menuOpen ? "is-open" : ""}`}
             aria-label="Navigation principale"
           >
-            <a
-              href="/"
-              aria-current={currentView === "accueil" ? "page" : undefined}
-              onClick={(e) => {
-                e.preventDefault();
-                navigateTo("accueil");
-              }}
-            >
-              Accueil
-            </a>
-
-            <div
-              className={`nav-dd ${ddOpen ? "is-open" : ""}`}
-              onMouseEnter={() => setDdOpen(true)}
-              onMouseLeave={() => setDdOpen(false)}
-            >
+            <div className="nav-center-links">
               <a
-                href="/services"
-                className={`nav-dd-top ${isServicesActive ? "is-active" : ""}`}
-                aria-current={currentView === "services" ? "page" : undefined}
+                href="/"
+                aria-current={currentView === "accueil" ? "page" : undefined}
                 onClick={(e) => {
                   e.preventDefault();
-                  navigateTo("services");
+                  navigateTo("accueil");
                 }}
               >
-                Nos services
+                Accueil
               </a>
-              <button
-                type="button"
-                className="nav-dd-btn"
-                aria-expanded={ddOpen}
-                aria-label="Afficher les services"
-                onClick={() => setDdOpen((v) => !v)}
-              >
-                <ChevronDown size={14} />
-              </button>
 
-              <div className="nav-dd-menu" role="menu">
+              <div
+                className={`nav-dd ${ddOpen ? "is-open" : ""}`}
+                onMouseEnter={() => setDdOpen(true)}
+                onMouseLeave={() => setDdOpen(false)}
+              >
                 <a
-                  href="/diagnostic"
-                  role="menuitem"
-                  aria-current={currentView === "diagnostic" ? "page" : undefined}
+                  href="/services"
+                  className={`nav-dd-top ${isServicesActive ? "is-active" : ""}`}
+                  aria-current={currentView === "services" ? "page" : undefined}
                   onClick={(e) => {
                     e.preventDefault();
-                    navigateTo("diagnostic");
+                    navigateTo("services");
                   }}
                 >
-                  Diagnostic &amp; feuille de route
+                  Nos services
                 </a>
-                <span className="dd-sep" aria-hidden="true" />
-                {CORE_DOMAIN_IDS.map((id) => {
-                  const s = ALL_SERVICES[id];
-                  return (
-                    <a
-                      key={id}
-                      href={`/${id}`}
-                      role="menuitem"
-                      aria-current={currentView === id ? "page" : undefined}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        navigateTo(id);
-                      }}
-                    >
-                      {s.title}
-                    </a>
-                  );
-                })}
-                <span className="dd-sep" aria-hidden="true" />
-                <a
-                  href="/tests-intrusion"
-                  role="menuitem"
-                  aria-current={currentView === "tests-intrusion" ? "page" : undefined}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    navigateTo("tests-intrusion");
-                  }}
+                <button
+                  type="button"
+                  className="nav-dd-btn"
+                  aria-expanded={ddOpen}
+                  aria-label="Afficher les services"
+                  onClick={() => setDdOpen((v) => !v)}
                 >
-                  Tests d’intrusion
-                </a>
-                <a
-                  href="/formation"
-                  role="menuitem"
-                  aria-current={currentView === "formation" ? "page" : undefined}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    navigateTo("formation");
-                  }}
-                >
-                  Formation certifiante &amp; personnalisée
-                </a>
+                  <ChevronDown size={14} />
+                </button>
+
+                <div className="nav-dd-menu" role="menu">
+                  <a
+                    href="/diagnostic"
+                    role="menuitem"
+                    aria-current={currentView === "diagnostic" ? "page" : undefined}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      navigateTo("diagnostic");
+                    }}
+                  >
+                    Diagnostic &amp; feuille de route
+                  </a>
+                  <span className="dd-sep" aria-hidden="true" />
+                  {CORE_DOMAIN_IDS.map((id) => {
+                    const s = ALL_SERVICES[id];
+                    return (
+                      <a
+                        key={id}
+                        href={`/${id}`}
+                        role="menuitem"
+                        aria-current={currentView === id ? "page" : undefined}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          navigateTo(id);
+                        }}
+                      >
+                        {s.title}
+                      </a>
+                    );
+                  })}
+                  <span className="dd-sep" aria-hidden="true" />
+                  <a
+                    href="/tests-intrusion"
+                    role="menuitem"
+                    aria-current={currentView === "tests-intrusion" ? "page" : undefined}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      navigateTo("tests-intrusion");
+                    }}
+                  >
+                    Tests d’intrusion
+                  </a>
+                  <a
+                    href="/formation"
+                    role="menuitem"
+                    aria-current={currentView === "formation" ? "page" : undefined}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      navigateTo("formation");
+                    }}
+                  >
+                    Formation certifiante &amp; personnalisée
+                  </a>
+                </div>
               </div>
+
+              <a
+                href="/a-propos"
+                aria-current={currentView === "a-propos" ? "page" : undefined}
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigateTo("a-propos");
+                }}
+              >
+                Qui sommes-nous
+              </a>
+
+              <a
+                href="/contact"
+                aria-current={currentView === "contact" ? "page" : undefined}
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigateTo("contact");
+                }}
+              >
+                Contact
+              </a>
             </div>
 
-            <a
-              href="/a-propos"
-              aria-current={currentView === "a-propos" ? "page" : undefined}
-              onClick={(e) => {
-                e.preventDefault();
-                navigateTo("a-propos");
-              }}
-            >
-              Qui sommes-nous
-            </a>
-
-            <a
-              href="/contact"
-              aria-current={currentView === "contact" ? "page" : undefined}
-              onClick={(e) => {
-                e.preventDefault();
-                navigateTo("contact");
-              }}
-            >
-              Contact
-            </a>
-
-            {/* Numéro relié directement à WhatsApp (Todo 1) */}
+            {/* Numéro relié directement à WhatsApp (aligné à droite, sans trait vertical) */}
             <a
               className="header-phone"
               href={WHATSAPP_URL}
