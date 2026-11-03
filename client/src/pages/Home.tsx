@@ -75,7 +75,8 @@ const WHATSAPP_DIAGNOSTIC_URL =
     "Bonjour YASEE Cybersécurité, je souhaite demander un diagnostic de cybersécurité pour mon organisation.",
   );
 
-const LINKEDIN_PROFILE_URL = "https://www.linkedin.com/in/samuel-kouame/";
+const LINKEDIN_PROFILE_URL =
+  "https://www.linkedin.com/in/ericyapo-cybersecurity?utm_source=share_via&utm_content=profile&utm_medium=member_ios";
 
 type ServicePageData = {
   id: ViewId;
@@ -2383,7 +2384,7 @@ export default function Home() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="footer-linkedin-link"
-                  aria-label="Profil LinkedIn de Samuel Kouamé"
+                  aria-label="Profil LinkedIn YASEE Cybersécurité"
                 >
                   <Linkedin size={15} />
                   <span>LinkedIn</span>
