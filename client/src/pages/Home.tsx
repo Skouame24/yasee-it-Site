@@ -68,6 +68,12 @@ const WHATSAPP_URL =
     "Bonjour YASEE Cybersécurité, je souhaite échanger avec un expert concernant la sécurité informatique de mon organisation.",
   );
 
+const WHATSAPP_DIAGNOSTIC_URL =
+  "https://wa.me/2250711444588?text=" +
+  encodeURIComponent(
+    "Bonjour YASEE Cybersécurité, je souhaite demander un diagnostic de cybersécurité pour mon organisation.",
+  );
+
 type ServicePageData = {
   id: ViewId;
   category: "Votre premier pas" | "Nos domaines" | "Autres services";
@@ -786,6 +792,11 @@ export default function Home() {
      ========================================================================= */
   const renderServiceDetailPage = (service: ServicePageData) => {
     const otherServiceIds = SERVICE_VIEWS.filter((id) => id !== service.id);
+    const serviceWhatsAppUrl =
+      "https://wa.me/2250711444588?text=" +
+      encodeURIComponent(
+        `Bonjour YASEE Cybersécurité, je souhaite demander un échange concernant le service : ${service.title}.`,
+      );
 
     return (
       <div className="page-view" key={service.id}>
@@ -817,11 +828,9 @@ export default function Home() {
             <div className="hero-buttons">
               <a
                 className="btn-pill btn-primary"
-                href="/contact"
-                onClick={(e) => {
-                  e.preventDefault();
-                  navigateTo("contact", service.title);
-                }}
+                href={serviceWhatsAppUrl}
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 Demander un échange
               </a>
@@ -1206,7 +1215,7 @@ export default function Home() {
             </a>
 
             {/* Numéro relié directement à WhatsApp (Todo 1) */}
-            {/* <a
+            <a
               className="header-phone"
               href={WHATSAPP_URL}
               target="_blank"
@@ -1215,15 +1224,13 @@ export default function Home() {
             >
               <MessageCircle size={16} className="phone-icon" />
               <span>(+225) 07 11 444 588</span>
-            </a> */}
+            </a>
 
             <a
               className="btn-pill btn-primary nav-cta"
-              href="/contact"
-              onClick={(e) => {
-                e.preventDefault();
-                navigateTo("contact");
-              }}
+              href={WHATSAPP_DIAGNOSTIC_URL}
+              target="_blank"
+              rel="noopener noreferrer"
             >
               Demander un diagnostic
             </a>
@@ -1272,11 +1279,9 @@ export default function Home() {
                   <div className="hero-buttons">
                     <a
                       className="btn-pill btn-primary"
-                      href="/contact"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        navigateTo("contact");
-                      }}
+                      href={WHATSAPP_DIAGNOSTIC_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
                       Demander un diagnostic
                     </a>
@@ -1642,11 +1647,9 @@ export default function Home() {
                 <div className="cta-band-buttons">
                   <a
                     className="btn-pill btn-white-green"
-                    href="/contact"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      navigateTo("contact");
-                    }}
+                    href={WHATSAPP_DIAGNOSTIC_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     Demander un diagnostic
                   </a>
