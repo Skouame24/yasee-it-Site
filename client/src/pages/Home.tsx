@@ -794,7 +794,7 @@ export default function Home() {
           <div className="container sp-hero-inner reveal">
             <nav className="crumb-aegis" aria-label="Fil d’Ariane">
               <a
-                href="#services"
+                href="/services"
                 onClick={(e) => {
                   e.preventDefault();
                   navigateTo("services");
@@ -817,7 +817,7 @@ export default function Home() {
             <div className="hero-buttons">
               <a
                 className="btn-pill btn-primary"
-                href="#contact"
+                href="/contact"
                 onClick={(e) => {
                   e.preventDefault();
                   navigateTo("contact", service.title);
@@ -827,7 +827,7 @@ export default function Home() {
               </a>
               <a
                 className="btn-pill btn-outline-light"
-                href="#services"
+                href="/services"
                 onClick={(e) => {
                   e.preventDefault();
                   navigateTo("services");
@@ -885,7 +885,7 @@ export default function Home() {
                     <p>{service.vsBox.p1}</p>
                     <p>{service.vsBox.p2}</p>
                     <a
-                      href={`#${service.vsBox.linkTarget}`}
+                      href={`/${service.vsBox.linkTarget}`}
                       className="text-arrow-link"
                       onClick={(e) => {
                         e.preventDefault();
@@ -924,7 +924,7 @@ export default function Home() {
 
                 <div className="getbox-actions">
                   <a
-                    href="#contact"
+                    href="/contact"
                     className="btn-pill btn-primary w-full"
                     onClick={(e) => {
                       e.preventDefault();
@@ -986,7 +986,7 @@ export default function Home() {
             <div className="cta-band-buttons">
               <a
                 className="btn-pill btn-white-green"
-                href="#contact"
+                href="/contact"
                 onClick={(e) => {
                   e.preventDefault();
                   navigateTo("contact", service.title);
@@ -1017,7 +1017,7 @@ export default function Home() {
                 return (
                   <a
                     key={id}
-                    href={`#${id}`}
+                    href={`/${id}`}
                     className="other-pill-link"
                     onClick={(e) => {
                       e.preventDefault();
@@ -1045,7 +1045,7 @@ export default function Home() {
         <div className="container header-inner">
           <a
             className="brand"
-            href="#accueil"
+            href="/"
             aria-label="YASEE Cybersécurité, accueil"
             onClick={(e) => {
               e.preventDefault();
@@ -1082,7 +1082,7 @@ export default function Home() {
             aria-label="Navigation principale"
           >
             <a
-              href="#accueil"
+              href="/"
               aria-current={currentView === "accueil" ? "page" : undefined}
               onClick={(e) => {
                 e.preventDefault();
@@ -1098,7 +1098,7 @@ export default function Home() {
               onMouseLeave={() => setDdOpen(false)}
             >
               <a
-                href="#services"
+                href="/services"
                 className={`nav-dd-top ${isServicesActive ? "is-active" : ""}`}
                 aria-current={currentView === "services" ? "page" : undefined}
                 onClick={(e) => {
@@ -1120,7 +1120,7 @@ export default function Home() {
 
               <div className="nav-dd-menu" role="menu">
                 <a
-                  href="#diagnostic"
+                  href="/diagnostic"
                   role="menuitem"
                   aria-current={currentView === "diagnostic" ? "page" : undefined}
                   onClick={(e) => {
@@ -1136,7 +1136,7 @@ export default function Home() {
                   return (
                     <a
                       key={id}
-                      href={`#${id}`}
+                      href={`/${id}`}
                       role="menuitem"
                       aria-current={currentView === id ? "page" : undefined}
                       onClick={(e) => {
@@ -1150,7 +1150,7 @@ export default function Home() {
                 })}
                 <span className="dd-sep" aria-hidden="true" />
                 <a
-                  href="#tests-intrusion"
+                  href="/tests-intrusion"
                   role="menuitem"
                   aria-current={currentView === "tests-intrusion" ? "page" : undefined}
                   onClick={(e) => {
@@ -1161,7 +1161,7 @@ export default function Home() {
                   Tests d’intrusion
                 </a>
                 <a
-                  href="#formation"
+                  href="/formation"
                   role="menuitem"
                   aria-current={currentView === "formation" ? "page" : undefined}
                   onClick={(e) => {
@@ -1175,7 +1175,7 @@ export default function Home() {
             </div>
 
             <a
-              href="#a-propos"
+              href="/a-propos"
               aria-current={currentView === "a-propos" ? "page" : undefined}
               onClick={(e) => {
                 e.preventDefault();
@@ -1186,7 +1186,7 @@ export default function Home() {
             </a>
 
             <a
-              href="#contact"
+              href="/contact"
               aria-current={currentView === "contact" ? "page" : undefined}
               onClick={(e) => {
                 e.preventDefault();
@@ -1197,7 +1197,7 @@ export default function Home() {
             </a>
 
             {/* Numéro relié directement à WhatsApp (Todo 1) */}
-            <a
+            {/* <a
               className="header-phone"
               href={WHATSAPP_URL}
               target="_blank"
@@ -1206,11 +1206,11 @@ export default function Home() {
             >
               <MessageCircle size={16} className="phone-icon" />
               <span>(+225) 07 11 444 588</span>
-            </a>
+            </a> */}
 
             <a
               className="btn-pill btn-primary nav-cta"
-              href="#contact"
+              href="/contact"
               onClick={(e) => {
                 e.preventDefault();
                 navigateTo("contact");
@@ -1263,7 +1263,7 @@ export default function Home() {
                   <div className="hero-buttons">
                     <a
                       className="btn-pill btn-primary"
-                      href="#contact"
+                      href="/contact"
                       onClick={(e) => {
                         e.preventDefault();
                         navigateTo("contact");
@@ -1273,7 +1273,7 @@ export default function Home() {
                     </a>
                     <a
                       className="btn-pill btn-outline-light"
-                      href="#services"
+                      href="/services"
                       onClick={(e) => {
                         e.preventDefault();
                         navigateTo("services");
@@ -1300,7 +1300,6 @@ export default function Home() {
               <div className="container">
                 <div className="aegis-split">
                   <div className="aegis-left reveal">
-                    <span className="eyebrow">Quatre domaines d’intervention</span>
                     <h2 className="aegis-big-heading">
                       <span>COMMENT NOUS</span>
                       <strong>VOUS AIDONS</strong>
@@ -1319,7 +1318,7 @@ export default function Home() {
                     </p>
                     <div className="aegis-left-links">
                       <a
-                        href="#diagnostic"
+                        href="/diagnostic"
                         className="text-arrow-link"
                         onClick={(e) => {
                           e.preventDefault();
@@ -1329,7 +1328,7 @@ export default function Home() {
                         Découvrir notre diagnostic (1er pas) <ArrowRight size={16} />
                       </a>
                       <a
-                        href="#services"
+                        href="/services"
                         className="text-arrow-link secondary"
                         onClick={(e) => {
                           e.preventDefault();
@@ -1349,7 +1348,7 @@ export default function Home() {
                       return (
                         <a
                           key={service.id}
-                          href={`#${service.id}`}
+                          href={`/${service.id}`}
                           className={`aegis-clean-card ${staggerClass} reveal reveal-delay-${(index % 3) + 1}`}
                           onClick={(e) => {
                             e.preventDefault();
@@ -1515,7 +1514,7 @@ export default function Home() {
                 <p className="maturity-footnote reveal">
                   Indicateur interne d’accompagnement, distinct d’une certification officielle.{" "}
                   <a
-                    href="#diagnostic"
+                    href="/diagnostic"
                     className="footnote-link"
                     onClick={(e) => {
                       e.preventDefault();
@@ -1579,7 +1578,7 @@ export default function Home() {
                     </div>
 
                     <a
-                      href="#a-propos"
+                      href="/a-propos"
                       className="text-arrow-link"
                       onClick={(e) => {
                         e.preventDefault();
@@ -1634,7 +1633,7 @@ export default function Home() {
                 <div className="cta-band-buttons">
                   <a
                     className="btn-pill btn-white-green"
-                    href="#contact"
+                    href="/contact"
                     onClick={(e) => {
                       e.preventDefault();
                       navigateTo("contact");
@@ -1685,7 +1684,7 @@ export default function Home() {
               <div className="container">
                 {/* Carte mise en avant : Votre premier pas (Diagnostic) */}
                 <a
-                  href="#diagnostic"
+                  href="/diagnostic"
                   className="featured-diag-banner reveal"
                   onClick={(e) => {
                     e.preventDefault();
@@ -1721,7 +1720,7 @@ export default function Home() {
                       return (
                         <a
                           key={s.id}
-                          href={`#${s.id}`}
+                          href={`/${s.id}`}
                           className={`aegis-clean-card reveal reveal-delay-${(idx % 3) + 1}`}
                           onClick={(e) => {
                             e.preventDefault();
@@ -1758,7 +1757,7 @@ export default function Home() {
                       return (
                         <a
                           key={s.id}
-                          href={`#${s.id}`}
+                          href={`/${s.id}`}
                           className={`aegis-clean-card horizontal-card reveal reveal-delay-${idx + 1}`}
                           onClick={(e) => {
                             e.preventDefault();
@@ -1893,7 +1892,7 @@ export default function Home() {
                 <div className="cta-band-buttons">
                   <a
                     className="btn-pill btn-white-green"
-                    href="#contact"
+                    href="/contact"
                     onClick={(e) => {
                       e.preventDefault();
                       navigateTo("contact");
@@ -2190,7 +2189,7 @@ export default function Home() {
           <div className="footer-brand-stack">
             <a
               className="brand"
-              href="#accueil"
+              href="/"
               onClick={(e) => {
                 e.preventDefault();
                 navigateTo("accueil");
@@ -2218,7 +2217,7 @@ export default function Home() {
             <ul>
               <li>
                 <a
-                  href="#diagnostic"
+                  href="/diagnostic"
                   onClick={(e) => {
                     e.preventDefault();
                     navigateTo("diagnostic");
@@ -2229,7 +2228,7 @@ export default function Home() {
               </li>
               <li>
                 <a
-                  href="#audit"
+                  href="/audit"
                   onClick={(e) => {
                     e.preventDefault();
                     navigateTo("audit");
@@ -2240,7 +2239,7 @@ export default function Home() {
               </li>
               <li>
                 <a
-                  href="#strategie"
+                  href="/strategie"
                   onClick={(e) => {
                     e.preventDefault();
                     navigateTo("strategie");
@@ -2251,7 +2250,7 @@ export default function Home() {
               </li>
               <li>
                 <a
-                  href="#resilience"
+                  href="/resilience"
                   onClick={(e) => {
                     e.preventDefault();
                     navigateTo("resilience");
@@ -2262,7 +2261,7 @@ export default function Home() {
               </li>
               <li>
                 <a
-                  href="#rssi-externalise"
+                  href="/rssi-externalise"
                   onClick={(e) => {
                     e.preventDefault();
                     navigateTo("rssi-externalise");
@@ -2273,7 +2272,7 @@ export default function Home() {
               </li>
               <li>
                 <a
-                  href="#tests-intrusion"
+                  href="/tests-intrusion"
                   onClick={(e) => {
                     e.preventDefault();
                     navigateTo("tests-intrusion");
@@ -2284,7 +2283,7 @@ export default function Home() {
               </li>
               <li>
                 <a
-                  href="#formation"
+                  href="/formation"
                   onClick={(e) => {
                     e.preventDefault();
                     navigateTo("formation");
@@ -2316,7 +2315,7 @@ export default function Home() {
               <li>Abidjan, Côte d’Ivoire</li>
               <li>
                 <a
-                  href="#a-propos"
+                  href="/a-propos"
                   onClick={(e) => {
                     e.preventDefault();
                     navigateTo("a-propos");
