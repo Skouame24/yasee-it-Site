@@ -23,6 +23,7 @@ import {
   X,
 } from "lucide-react";
 import { FormEvent, ReactNode, useEffect, useState } from "react";
+import { useLocation } from "wouter";
 
 export type ViewId =
   | "accueil"
@@ -608,9 +609,11 @@ const contactInterests = [
   "Formation certifiante & personnalisée",
 ];
 
-function parseHashToView(): ViewId {
-  const raw = window.location.hash.replace(/^#/, "").trim() as ViewId;
-  if (VALID_VIEWS.includes(raw)) return raw;
+function resolveCurrentView(pathname: string): ViewId {
+  const cleanPath = pathname.replace(/^\/+|\/+$/g, "").trim() as ViewId;
+  if (VALID_VIEWS.includes(cleanPath)) return cleanPath;
+  const rawHash = window.location.hash.replace(/^#/, "").trim() as ViewId;
+  if (VALID_VIEWS.includes(rawHash)) return rawHash;
   return "accueil";
 }
 
@@ -672,7 +675,8 @@ function usePageMotion(activeView: ViewId) {
 }
 
 export default function Home() {
-  const [currentView, setCurrentView] = useState<ViewId>(() => parseHashToView());
+  const [location, setLocation] = useLocation();
+  const [currentView, setCurrentView] = useState<ViewId>(() => resolveCurrentView(location));
   const [menuOpen, setMenuOpen] = useState(false);
   const [ddOpen, setDdOpen] = useState(false);
   const [activeMaturity, setActiveMaturity] = useState(3);
@@ -695,8 +699,16 @@ export default function Home() {
   usePageMotion(currentView);
 
   useEffect(() => {
+    const nextView = resolveCurrentView(location);
+    setCurrentView(nextView);
+    setMenuOpen(false);
+    setDdOpen(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [location]);
+
+  useEffect(() => {
     const onHashChange = () => {
-      const nextView = parseHashToView();
+      const nextView = resolveCurrentView(window.location.pathname);
       setCurrentView(nextView);
       setMenuOpen(false);
       setDdOpen(false);
@@ -719,14 +731,12 @@ export default function Home() {
     if (preselectInterest && !selectedInterests.includes(preselectInterest)) {
       setSelectedInterests((prev) => [...prev, preselectInterest]);
     }
-    if (window.location.hash !== `#${view}`) {
-      window.location.hash = view;
-    } else {
-      setCurrentView(view);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
+    const targetPath = view === "accueil" ? "/" : `/${view}`;
+    setLocation(targetPath);
+    setCurrentView(view);
     setMenuOpen(false);
     setDdOpen(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const toggleInterest = (item: string) => {
@@ -1290,28 +1300,22 @@ export default function Home() {
               <div className="container">
                 <div className="aegis-split">
                   <div className="aegis-left reveal">
-                    <span className="eyebrow">Comment nous pouvons vous aider</span>
+                    <span className="eyebrow">Quatre domaines d’intervention</span>
                     <h2 className="aegis-big-heading">
-                      <span>Quatre domaines</span>
-                      <strong>d’intervention</strong>
+                      <span>COMMENT NOUS</span>
+                      <strong>VOUS AIDONS</strong>
                     </h2>
                     <p className="aegis-green-sub">
                       Protéger vos données, vos systèmes et la continuité de vos activités.
                     </p>
                     <p className="aegis-body">
-                      Tout commence par un{" "}
-                      <a
-                        href="#diagnostic"
-                        className="inline-accent-link"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          navigateTo("diagnostic");
-                        }}
-                      >
-                        diagnostic
-                      </a>{" "}
-                      pour avoir une vue claire de votre niveau de sécurité et des actions à engager en priorité. Selon
-                      votre besoin, nous intervenons ensuite sur quatre domaines complémentaires.
+                      En tant qu’entreprise expérimentée et indépendante de cybersécurité, notre mission est de soulager
+                      du stress lié à la cybersécurité en offrant des solutions claires, pratiques et adaptées à votre
+                      entreprise.
+                    </p>
+                    <p className="aegis-body">
+                      Que vous commenciez tout juste à explorer vos besoins en matière de cybersécurité ou que vous
+                      souhaitiez renforcer vos défenses existantes, nous sommes là pour vous soutenir à chaque étape.
                     </p>
                     <div className="aegis-left-links">
                       <a
@@ -1322,7 +1326,7 @@ export default function Home() {
                           navigateTo("diagnostic");
                         }}
                       >
-                        Découvrir le diagnostic &amp; feuille de route <ArrowRight size={16} />
+                        Découvrir notre diagnostic (1er pas) <ArrowRight size={16} />
                       </a>
                       <a
                         href="#services"
@@ -1332,7 +1336,7 @@ export default function Home() {
                           navigateTo("services");
                         }}
                       >
-                        Voir nos 7 services (dont Pentest &amp; Formation) <ArrowRight size={16} />
+                        Voir tous nos services <ArrowRight size={16} />
                       </a>
                     </div>
                   </div>
