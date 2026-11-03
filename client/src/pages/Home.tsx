@@ -789,8 +789,13 @@ export default function Home() {
 
     return (
       <div className="page-view" key={service.id}>
-        {/* Hero de page service avec découpe cambrée */}
+        {/* Hero éditorial atmosphérique avec découpe cambrée façon Aegis */}
         <section className="sp-hero-aegis">
+          <div className="hero-bg" aria-hidden="true">
+            <img src="/hero-team.jpg" alt="" className="hero-photo" />
+            <div className="hero-overlay" />
+          </div>
+
           <div className="container sp-hero-inner reveal">
             <nav className="crumb-aegis" aria-label="Fil d’Ariane">
               <a
@@ -806,13 +811,8 @@ export default function Home() {
               <span>{service.category}</span>
             </nav>
 
-            <div className="sp-hero-title-row">
-              <div className="sp-hero-icon">{service.svgIcon}</div>
-              <div>
-                <h1>{service.title}</h1>
-                <p className="sp-hero-lead">{service.lead}</p>
-              </div>
-            </div>
+            <h1>{service.title}</h1>
+            <p className="sp-hero-lead">{service.lead}</p>
 
             <div className="hero-buttons">
               <a
@@ -839,40 +839,44 @@ export default function Home() {
           </div>
 
           <div className="section-cut cut-bottom" aria-hidden="true">
-            <svg viewBox="0 0 1440 90" fill="none" preserveAspectRatio="none">
+            <svg viewBox="0 0 1440 110" fill="none" preserveAspectRatio="none">
               <path
-                d="M0 90 L0 74 L980 12 Q1050 6 1120 18 L1440 62 L1440 90 Z"
+                d="M0 110 L0 92 L960 14 Q1035 6 1110 20 L1440 74 L1440 110 Z"
                 fill="#ffffff"
               />
             </svg>
           </div>
         </section>
 
-        {/* Corps de la page service : 2 colonnes (Quand + Ce que nous faisons | Ce que vous recevez) */}
+        {/* Corps éditorial : 2 colonnes aérées sans boîtes IA */}
         <section className="section">
           <div className="container">
             <div className="sp-grid-aegis">
               <div className="sp-left-stack reveal">
-                <div className="sp-block">
-                  <span className="eyebrow">Votre situation</span>
-                  <h2>Quand en avez-vous besoin ?</h2>
-                  <ul className="when-grid">
-                    {service.whenNeeded.map((item) => (
-                      <li key={item} className="when-card">
-                        <span className="when-dot" aria-hidden="true" />
-                        <span>{item}</span>
+                <div className="sp-editorial-block">
+                  <span className="eyebrow">Votre contexte</span>
+                  <h2>
+                    Quand en avez-vous <span className="marker-bar">besoin ?</span>
+                  </h2>
+                  <ol className="editorial-numbered-list">
+                    {service.whenNeeded.map((item, idx) => (
+                      <li key={item}>
+                        <span className="ed-num">0{idx + 1}</span>
+                        <p>{item}</p>
                       </li>
                     ))}
-                  </ul>
+                  </ol>
                 </div>
 
-                <div className="sp-block">
+                <div className="sp-editorial-block">
                   <span className="eyebrow">Notre intervention</span>
                   <h2>Ce que nous faisons</h2>
-                  <ul className="dolist-aegis">
+                  <ul className="editorial-check-list">
                     {service.whatWeDo.map((item) => (
                       <li key={item}>
-                        <span className="do-square" aria-hidden="true" />
+                        <span className="icon-circle check" aria-hidden="true">
+                          <Check size={13} strokeWidth={3} />
+                        </span>
                         <span>{item}</span>
                       </li>
                     ))}
@@ -880,7 +884,7 @@ export default function Home() {
                 </div>
 
                 {service.vsBox && (
-                  <div className="vs-box-aegis">
+                  <div className="vs-editorial-note">
                     <h3>{service.vsBox.title}</h3>
                     <p>{service.vsBox.p1}</p>
                     <p>{service.vsBox.p2}</p>
@@ -898,9 +902,12 @@ export default function Home() {
                 )}
               </div>
 
-              {/* Colonne droite : Ce que vous recevez + Vos bénéfices */}
+              {/* Colonne droite : Panneau sombre Aegis des livrables */}
               <aside className="getbox-aegis reveal reveal-delay-2">
-                <span className="eyebrow eyebrow-light">Livrables concrets</span>
+                <div className="getbox-icon-head">
+                  <span className="eyebrow eyebrow-light">Livrables concrets</span>
+                  <div className="clean-card-icon">{service.svgIcon}</div>
+                </div>
                 <h2>Ce que vous recevez</h2>
                 <ul className="getbox-list">
                   {service.whatYouGet.map((item) => (
@@ -948,24 +955,24 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Démarche en 4 étapes propre à ce service */}
+        {/* Démarche en 4 étapes : Ligne architecturale épurée sur fond sablé (zéro boîte IA) */}
         <section className="section sand-section sp-steps-section">
           <div className="section-cut cut-top" aria-hidden="true">
-            <svg viewBox="0 0 1440 60" fill="none" preserveAspectRatio="none">
-              <polygon points="0,0 1440,0 1440,48 0,8" fill="#ffffff" />
+            <svg viewBox="0 0 1440 64" fill="none" preserveAspectRatio="none">
+              <polygon points="0,0 1440,0 1440,52 0,10" fill="#ffffff" />
             </svg>
           </div>
 
           <div className="container">
-            <div className="steps-head reveal">
+            <div className="editorial-steps-intro reveal">
               <span className="eyebrow">Comment ça se passe</span>
-              <h2>Notre démarche</h2>
+              <h2>Notre démarche en 4 étapes</h2>
             </div>
 
-            <div className="steps-grid-4 reveal">
+            <div className="editorial-steps-line reveal">
               {service.steps.map((st, idx) => (
-                <div key={st.title} className="step-item">
-                  <span className="step-num">0{idx + 1}</span>
+                <div key={st.title} className="editorial-step-col">
+                  <span className="ed-step-big-num">0{idx + 1}</span>
                   <h3>{st.title}</h3>
                   <p>{st.text}</p>
                 </div>
@@ -1007,28 +1014,30 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Navigation rapide vers les autres services */}
+        {/* Navigation éditoriale vers les autres services */}
         <section className="section others-section">
           <div className="container">
-            <span className="eyebrow">Nos autres services</span>
-            <div className="others-pills">
-              {otherServiceIds.map((id) => {
-                const s = ALL_SERVICES[id];
-                return (
-                  <a
-                    key={id}
-                    href={`/${id}`}
-                    className="other-pill-link"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      navigateTo(id);
-                    }}
-                  >
-                    <span>{s.title}</span>
-                    <ArrowRight size={15} />
-                  </a>
-                );
-              })}
+            <div className="others-editorial-bar">
+              <span className="eyebrow">Explorer nos autres expertises</span>
+              <div className="others-pills">
+                {otherServiceIds.map((id) => {
+                  const s = ALL_SERVICES[id];
+                  return (
+                    <a
+                      key={id}
+                      href={`/${id}`}
+                      className="other-pill-link"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        navigateTo(id);
+                      }}
+                    >
+                      <span>{s.title}</span>
+                      <ArrowRight size={15} />
+                    </a>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </section>
@@ -1591,15 +1600,15 @@ export default function Home() {
                 </div>
 
                 <div className="steps-section-block reveal">
-                  <div className="steps-head">
+                  <div className="editorial-steps-intro">
                     <span className="eyebrow">Notre démarche</span>
                     <h2>Quatre étapes, des résultats concrets</h2>
                   </div>
 
-                  <div className="steps-grid-4">
+                  <div className="editorial-steps-line">
                     {homeSteps.map((step) => (
-                      <div key={step.number} className="step-item">
-                        <span className="step-num">{step.number}</span>
+                      <div key={step.number} className="editorial-step-col">
+                        <span className="ed-step-big-num">{step.number}</span>
                         <h3>{step.title}</h3>
                         <p>{step.text}</p>
                       </div>
@@ -1657,11 +1666,16 @@ export default function Home() {
         )}
 
         {/* ===================================================================
-            VUE 2 : NOS SERVICES — Vue d'ensemble (#services)
+            VUE 2 : NOS SERVICES — Vue d'ensemble (/services)
            =================================================================== */}
         {currentView === "services" && (
           <div className="page-view" key="services">
             <section className="sp-hero-aegis">
+              <div className="hero-bg" aria-hidden="true">
+                <img src="/hero-team.jpg" alt="" className="hero-photo" />
+                <div className="hero-overlay" />
+              </div>
+
               <div className="container sp-hero-inner reveal">
                 <span className="hero-eyebrow">Nos services</span>
                 <h1>Un premier pas simple, puis un accompagnement à votre rythme</h1>
@@ -1671,18 +1685,19 @@ export default function Home() {
                 </p>
               </div>
               <div className="section-cut cut-bottom" aria-hidden="true">
-                <svg viewBox="0 0 1440 90" fill="none" preserveAspectRatio="none">
+                <svg viewBox="0 0 1440 110" fill="none" preserveAspectRatio="none">
                   <path
-                    d="M0 90 L0 74 L980 12 Q1050 6 1120 18 L1440 62 L1440 90 Z"
+                    d="M0 110 L0 92 L960 14 Q1035 6 1110 20 L1440 74 L1440 110 Z"
                     fill="#ffffff"
                   />
                 </svg>
               </div>
             </section>
 
+            {/* Premier pas : Diagnostic + Nos 4 domaines en split Aegis */}
             <section className="section">
               <div className="container">
-                {/* Carte mise en avant : Votre premier pas (Diagnostic) */}
+                {/* Bloc éditorial Votre Premier Pas */}
                 <a
                   href="/diagnostic"
                   className="featured-diag-banner reveal"
@@ -1695,8 +1710,8 @@ export default function Home() {
                     <span className="eyebrow eyebrow-light">Votre premier pas</span>
                     <h2>Diagnostic de cybersécurité &amp; feuille de route</h2>
                     <p>
-                      Votre premier pas : une vue claire de votre niveau de sécurité et des actions à engager en
-                      priorité. Sur site ou à distance.
+                      Une vue claire de votre niveau de sécurité sur 5 niveaux de maturité et des actions à engager en
+                      priorité. Sur site à Abidjan ou à distance.
                     </p>
                     <span className="featured-diag-cta">
                       Découvrir le diagnostic <ArrowRight size={17} />
@@ -1707,33 +1722,48 @@ export default function Home() {
                   </div>
                 </a>
 
-                {/* Nos 4 domaines d'intervention */}
-                <div className="services-group-block">
-                  <div className="services-group-head reveal">
+                {/* Split Aegis : Texte à gauche + 4 cartes sombres décalées à droite */}
+                <div className="aegis-split services-page-split">
+                  <div className="aegis-left reveal">
                     <span className="eyebrow">Cœur de métier</span>
-                    <h2>Nos domaines d’intervention</h2>
+                    <h2 className="aegis-big-heading">
+                      <span>Nos domaines</span>
+                      <strong>d’intervention</strong>
+                    </h2>
+                    <p className="aegis-green-sub">
+                      Un accompagnement indépendant, proportionné à vos enjeux et à vos moyens.
+                    </p>
+                    <p className="aegis-body">
+                      Chaque domaine fait l’objet d’une démarche structurée, de livrables lisibles par la direction et
+                      d’un suivi concret dans la durée. Cliquez sur un domaine pour découvrir le détail de notre
+                      intervention.
+                    </p>
                   </div>
 
-                  <div className="services-overview-grid-4">
-                    {CORE_DOMAIN_IDS.map((id, idx) => {
+                  <div className="aegis-cards-grid">
+                    {CORE_DOMAIN_IDS.map((id, index) => {
                       const s = ALL_SERVICES[id];
+                      const staggerClass = index % 2 === 1 ? "card-offset" : "";
                       return (
                         <a
                           key={s.id}
                           href={`/${s.id}`}
-                          className={`aegis-clean-card reveal reveal-delay-${(idx % 3) + 1}`}
+                          className={`aegis-clean-card ${staggerClass} reveal reveal-delay-${(index % 3) + 1}`}
                           onClick={(e) => {
                             e.preventDefault();
                             navigateTo(s.id);
                           }}
                         >
                           <div className="clean-card-icon">{s.svgIcon}</div>
-                          <div className="clean-card-TextBlock">
-                            <h3>{s.title}</h3>
-                            <p>{s.short}</p>
-                          </div>
                           <div className="clean-card-bottom">
-                            <span className="clean-card-deliv">En savoir plus</span>
+                            <div>
+                              <h3>
+                                {s.cardLines[0]}
+                                <br />
+                                {s.cardLines[1]}
+                              </h3>
+                              <span className="clean-card-deliv">{s.deliverable}</span>
+                            </div>
                             <span className="clean-card-arrow" aria-hidden="true">
                               <ChevronRight size={17} />
                             </span>
@@ -1743,36 +1773,59 @@ export default function Home() {
                     })}
                   </div>
                 </div>
+              </div>
+            </section>
 
-                {/* Autres services : Tests d'intrusion + Formation certifiante & personnalisée */}
-                <div className="services-group-block">
-                  <div className="services-group-head reveal">
+            {/* Autres services sur fond sablé avec découpe cambrée */}
+            <section className="section sand-section sp-steps-section">
+              <div className="section-cut cut-top" aria-hidden="true">
+                <svg viewBox="0 0 1440 64" fill="none" preserveAspectRatio="none">
+                  <polygon points="0,0 1440,0 1440,52 0,10" fill="#ffffff" />
+                </svg>
+              </div>
+
+              <div className="container">
+                <div className="aegis-split">
+                  <div className="aegis-left reveal">
                     <span className="eyebrow">Expertises complémentaires</span>
-                    <h2>Autres services</h2>
+                    <h2 className="aegis-big-heading">
+                      <span>Autres</span>
+                      <strong>services</strong>
+                    </h2>
+                    <p className="aegis-body">
+                      Pour tester la résistance réelle de vos applications ou faire monter vos équipes en compétence
+                      avec des programmes certifiants ou sur mesure.
+                    </p>
                   </div>
 
-                  <div className="services-overview-grid-2">
+                  <div className="aegis-cards-grid">
                     {OTHER_SERVICE_IDS.map((id, idx) => {
                       const s = ALL_SERVICES[id];
+                      const staggerClass = idx % 2 === 1 ? "card-offset" : "";
                       return (
                         <a
                           key={s.id}
                           href={`/${s.id}`}
-                          className={`aegis-clean-card horizontal-card reveal reveal-delay-${idx + 1}`}
+                          className={`aegis-clean-card ${staggerClass} reveal reveal-delay-${idx + 1}`}
                           onClick={(e) => {
                             e.preventDefault();
                             navigateTo(s.id);
                           }}
                         >
                           <div className="clean-card-icon">{s.svgIcon}</div>
-                          <div className="clean-card-TextBlock">
-                            <h3>{s.title}</h3>
-                            <p>{s.short}</p>
-                            <span className="clean-card-deliv">Livrable : {s.deliverable}</span>
+                          <div className="clean-card-bottom">
+                            <div>
+                              <h3>
+                                {s.cardLines[0]}
+                                <br />
+                                {s.cardLines[1]}
+                              </h3>
+                              <span className="clean-card-deliv">{s.deliverable}</span>
+                            </div>
+                            <span className="clean-card-arrow" aria-hidden="true">
+                              <ChevronRight size={17} />
+                            </span>
                           </div>
-                          <span className="clean-card-arrow" aria-hidden="true">
-                            <ChevronRight size={17} />
-                          </span>
                         </a>
                       );
                     })}
@@ -1789,11 +1842,16 @@ export default function Home() {
         {SERVICE_VIEWS.includes(currentView) && renderServiceDetailPage(ALL_SERVICES[currentView])}
 
         {/* ===================================================================
-            VUE 10 : QUI SOMMES-NOUS (#a-propos)
+            VUE 10 : QUI SOMMES-NOUS (/a-propos)
            =================================================================== */}
         {currentView === "a-propos" && (
           <div className="page-view" key="a-propos">
             <section className="sp-hero-aegis">
+              <div className="hero-bg" aria-hidden="true">
+                <img src="/about-team.jpg" alt="" className="hero-photo" />
+                <div className="hero-overlay" />
+              </div>
+
               <div className="container sp-hero-inner reveal">
                 <span className="hero-eyebrow">Qui sommes-nous</span>
                 <h1>YASEE Cybersécurité, le pôle conseil en cybersécurité de YASEE IT</h1>
@@ -1804,16 +1862,16 @@ export default function Home() {
                 </p>
               </div>
               <div className="section-cut cut-bottom" aria-hidden="true">
-                <svg viewBox="0 0 1440 90" fill="none" preserveAspectRatio="none">
+                <svg viewBox="0 0 1440 110" fill="none" preserveAspectRatio="none">
                   <path
-                    d="M0 90 L0 74 L980 12 Q1050 6 1120 18 L1440 62 L1440 90 Z"
+                    d="M0 110 L0 92 L960 14 Q1035 6 1110 20 L1440 74 L1440 110 Z"
                     fill="#ffffff"
                   />
                 </svg>
               </div>
             </section>
 
-            {/* 3 piliers + Photo équipe */}
+            {/* Split éditorial : Photo + 3 engagements séparés par de fines lignes (zéro boîte IA) */}
             <section className="section">
               <div className="container">
                 <div className="about-top-split">
@@ -1825,20 +1883,28 @@ export default function Home() {
                     />
                   </div>
 
-                  <div className="about-pillars-stack reveal reveal-delay-2">
-                    {aboutValues.map((val, idx) => (
-                      <div key={val.title} className="about-pillar-card">
-                        <span className="diff-num">0{idx + 1}</span>
-                        <h3>{val.title}</h3>
-                        <p>{val.text}</p>
-                      </div>
-                    ))}
+                  <div className="about-editorial-copy reveal reveal-delay-2">
+                    <span className="eyebrow">Notre approche</span>
+                    <h2>
+                      Une expertise <span className="marker-bar">proche de vous</span> et indépendante
+                    </h2>
+                    <div className="about-hairline-list">
+                      {aboutValues.map((val, idx) => (
+                        <div key={val.title} className="about-hairline-row">
+                          <span className="ed-num">0{idx + 1}</span>
+                          <div>
+                            <h3>{val.title}</h3>
+                            <p>{val.text}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
             </section>
 
-            {/* Nos compétences (6 cartes) + Nos certifications */}
+            {/* Nos compétences : Grille typographique architecturale (zéro petite boîte d'icône IA) */}
             <section className="section sand-section">
               <div className="section-cut cut-top" aria-hidden="true">
                 <svg viewBox="0 0 1440 64" fill="none" preserveAspectRatio="none">
@@ -1847,7 +1913,7 @@ export default function Home() {
               </div>
 
               <div className="container">
-                <div className="centered-intro reveal">
+                <div className="editorial-steps-intro reveal">
                   <span className="eyebrow">Nos compétences</span>
                   <h2>
                     13 ans d’expérience en systèmes d’information et{" "}
@@ -1855,13 +1921,10 @@ export default function Home() {
                   </h2>
                 </div>
 
-                <div className="competencies-grid-6">
+                <div className="editorial-competencies-grid reveal">
                   {aboutCompetencies.map((comp, idx) => (
-                    <div
-                      key={comp.title}
-                      className={`comp-card reveal reveal-delay-${(idx % 3) + 1}`}
-                    >
-                      <div className="comp-icon">{comp.icon}</div>
+                    <div key={comp.title} className="editorial-comp-item">
+                      <span className="ed-num">0{idx + 1}</span>
                       <h3>{comp.title}</h3>
                       <p>{comp.text}</p>
                     </div>
@@ -1916,11 +1979,16 @@ export default function Home() {
         )}
 
         {/* ===================================================================
-            VUE 11 : CONTACT (#contact)
+            VUE 11 : CONTACT (/contact)
            =================================================================== */}
         {currentView === "contact" && (
           <div className="page-view" key="contact">
             <section className="sp-hero-aegis">
+              <div className="hero-bg" aria-hidden="true">
+                <img src="/hero-team.jpg" alt="" className="hero-photo" />
+                <div className="hero-overlay" />
+              </div>
+
               <div className="container sp-hero-inner reveal">
                 <span className="hero-eyebrow">Contact</span>
                 <h1>Demander un diagnostic ou un premier échange</h1>
@@ -1930,9 +1998,9 @@ export default function Home() {
                 </p>
               </div>
               <div className="section-cut cut-bottom" aria-hidden="true">
-                <svg viewBox="0 0 1440 90" fill="none" preserveAspectRatio="none">
+                <svg viewBox="0 0 1440 110" fill="none" preserveAspectRatio="none">
                   <path
-                    d="M0 90 L0 74 L980 12 Q1050 6 1120 18 L1440 62 L1440 90 Z"
+                    d="M0 110 L0 92 L960 14 Q1035 6 1110 20 L1440 74 L1440 110 Z"
                     fill="#091929"
                   />
                 </svg>
