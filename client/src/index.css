@@ -19,8 +19,9 @@
     --yasee-lime: #bdf755;
     --yasee-blue: #0b5cad;
 
-    --sand-bg: #efede7;
-    --sand-card: #f7f6f2;
+    /* Fond alternatif dans les couleurs froides YASEE (bleu ardoise très clair, plus de beige/sable) */
+    --sand-bg: #f1f6fb;
+    --sand-card: #ffffff;
     --surface-white: #ffffff;
     --surface-soft: #f5f8fa;
 
@@ -924,26 +925,17 @@
   margin: 0;
   padding: 0;
   display: grid;
-  gap: 18px;
+  gap: 16px;
 }
 
 .editorial-check-list li {
-  position: relative;
-  padding-left: 28px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
   font-size: 1.02rem;
-  line-height: 1.68;
-  color: var(--ink-700);
-}
-
-.editorial-check-list li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 11px;
-  width: 14px;
-  height: 2.5px;
-  background: var(--yasee-green);
-  border-radius: 2px;
+  line-height: 1.65;
+  color: var(--ink-800, var(--ink-900));
+  font-weight: 500;
 }
 
 .vs-editorial-note {
@@ -1041,15 +1033,15 @@
   padding: 104px 0 96px !important;
 }
 
-/* Frise horizontale éditoriale des 4 étapes (remplace les 4 boîtes génériques) */
+/* Frise horizontale éditoriale des 4 étapes (design YASEE épuré avec barre d'accent verte) */
 .editorial-steps-intro {
-  max-width: 640px;
-  margin-bottom: 48px;
+  max-width: 680px;
+  margin-bottom: 44px;
 }
 
 .editorial-steps-intro h2 {
-  margin: 6px 0 0;
-  font-size: clamp(1.95rem, 3.2vw, 2.65rem);
+  margin: 4px 0 0;
+  font-size: clamp(1.95rem, 3.2vw, 2.55rem);
   font-weight: 800;
   letter-spacing: -0.025em;
   line-height: 1.12;
@@ -1059,40 +1051,50 @@
 .editorial-steps-line {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  border-top: 2px solid var(--ink-900);
+  gap: 32px;
+  border-top: 2px solid #d4dde6;
 }
 
 .editorial-step-col {
-  padding: 28px 28px 8px 0;
+  padding: 28px 16px 8px 0;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.editorial-step-col:not(:first-child) {
-  padding-left: 24px;
-  border-left: 1px solid rgba(13, 27, 42, 0.12);
+.editorial-step-col::after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 56px;
+  height: 3px;
+  background: var(--yasee-green);
+  border-radius: 2px;
 }
 
 .ed-step-big-num {
   display: block;
-  font-family: var(--font-mono);
-  font-size: 2.3rem;
+  font-family: var(--font-display);
+  font-size: 2.5rem;
   font-weight: 800;
   line-height: 1;
   color: var(--yasee-green);
-  margin-bottom: 16px;
+  margin-bottom: 6px;
   letter-spacing: -0.03em;
 }
 
 .editorial-step-col h3 {
-  margin: 0 0 10px;
-  font-size: 1.16rem;
+  margin: 0;
+  font-size: 1.22rem;
   font-weight: 800;
   color: var(--ink-900);
 }
 
 .editorial-step-col p {
   margin: 0;
-  font-size: 0.93rem;
+  font-size: 0.96rem;
   line-height: 1.62;
   color: var(--ink-700);
 }
@@ -2060,6 +2062,19 @@
   gap: 7px;
   color: var(--yasee-lime);
   font-weight: 600;
+}
+
+.footer-linkedin-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.footer-linkedin-link:hover {
+  color: var(--yasee-lime);
 }
 
 .footer-legal {

@@ -8,6 +8,7 @@ import {
   Copy,
   FileCheck2,
   Layers,
+  Linkedin,
   Lock,
   Mail,
   MapPin,
@@ -73,6 +74,8 @@ const WHATSAPP_DIAGNOSTIC_URL =
   encodeURIComponent(
     "Bonjour YASEE Cybersécurité, je souhaite demander un diagnostic de cybersécurité pour mon organisation.",
   );
+
+const LINKEDIN_PROFILE_URL = "https://www.linkedin.com/in/samuel-kouame/";
 
 type ServicePageData = {
   id: ViewId;
@@ -950,13 +953,13 @@ export default function Home() {
                     Demander ce service
                   </a>
                   <a
-                    href={WHATSAPP_URL}
+                    href={serviceWhatsAppUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn-pill btn-outline-light w-full"
                   >
                     <MessageCircle size={16} />
-                    <span>Échanger sur WhatsApp</span>
+                    <span>Échangeons</span>
                   </a>
                 </div>
               </aside>
@@ -964,7 +967,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Démarche en 4 étapes : Ligne architecturale épurée sur fond sablé (zéro boîte IA) */}
+        {/* Démarche en 4 étapes : Ligne architecturale sur fond aux couleurs YASEE */}
         <section className="section sand-section sp-steps-section">
           <div className="section-cut cut-top" aria-hidden="true">
             <svg viewBox="0 0 1440 64" fill="none" preserveAspectRatio="none">
@@ -974,7 +977,6 @@ export default function Home() {
 
           <div className="container">
             <div className="editorial-steps-intro reveal">
-              <span className="eyebrow">Comment ça se passe</span>
               <h2>Notre démarche en 4 étapes</h2>
             </div>
 
@@ -1224,15 +1226,6 @@ export default function Home() {
             >
               <MessageCircle size={16} className="phone-icon" />
               <span>(+225) 07 11 444 588</span>
-            </a>
-
-            <a
-              className="btn-pill btn-primary nav-cta"
-              href={WHATSAPP_DIAGNOSTIC_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Demander un diagnostic
             </a>
           </nav>
         </div>
@@ -2377,13 +2370,25 @@ export default function Home() {
                   className="footer-wa-link"
                 >
                   <MessageCircle size={14} />
-                  <span>(+225) 07 11 444 588 (WhatsApp)</span>
+                  <span>(+225) 07 11 444 588</span>
                 </a>
               </li>
               <li>
                 <a href="mailto:info@yasee-it.ci">info@yasee-it.ci</a>
               </li>
               <li>Abidjan, Côte d’Ivoire</li>
+              <li>
+                <a
+                  href={LINKEDIN_PROFILE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="footer-linkedin-link"
+                  aria-label="Profil LinkedIn de Samuel Kouamé"
+                >
+                  <Linkedin size={15} />
+                  <span>LinkedIn</span>
+                </a>
+              </li>
               <li>
                 <a
                   href="/a-propos"
@@ -2401,18 +2406,6 @@ export default function Home() {
           <div className="footer-legal">© YASEE IT · yasee-it.ci</div>
         </div>
       </footer>
-
-      {/* Bouton flottant WhatsApp en bas à droite */}
-      <a
-        href={WHATSAPP_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="floating-cta-pill"
-      >
-        <span className="floating-dot" aria-hidden="true" />
-        <MessageCircle size={17} />
-        <span>WhatsApp · Parler à un expert</span>
-      </a>
     </div>
   );
 }
