@@ -78,6 +78,65 @@ const WHATSAPP_DIAGNOSTIC_URL =
 const LINKEDIN_PROFILE_URL =
   "https://www.linkedin.com/in/ericyapo-cybersecurity?utm_source=share_via&utm_content=profile&utm_medium=member_ios";
 
+/* Métadonnées SEO dynamiques par route */
+const VIEW_METADATA: Record<ViewId, { title: string; description: string }> = {
+  accueil: {
+    title: "YASEE Cybersécurité — Conseil, Gouvernance & Risques à Abidjan",
+    description:
+      "Cabinet indépendant de conseil en cybersécurité à Abidjan. Diagnostic de maturité, audit de conformité, stratégie, résilience et RSSI externalisé. Aucun produit à vous vendre.",
+  },
+  services: {
+    title: "Nos Services de Cybersécurité | YASEE Cybersécurité",
+    description:
+      "Catalogue complet des services YASEE : diagnostic de maturité, audit technique et conformité, stratégie cyber, résilience PCA/PRA, RSSI externalisé et pentest.",
+  },
+  diagnostic: {
+    title: "Diagnostic de Cybersécurité & Feuille de Route | YASEE",
+    description:
+      "Évaluez votre niveau de sécurité en 5 niveaux de maturité. Restitution claire pour votre comité de direction et priorités concrètes chiffrées.",
+  },
+  audit: {
+    title: "Audit de Sécurité & Conformité Réglementaire | YASEE",
+    description:
+      "Audit organisationnel et technique, conformité RGSSI, protection des données personnelles et référentiels ISO/IEC 27001 avec rapport d’écarts priorisé.",
+  },
+  strategie: {
+    title: "Stratégie Cybersécurité & Feuille de Route 90 Jours | YASEE",
+    description:
+      "Alignez vos investissements informatiques sur vos enjeux d’affaires avec un plan directeur de sécurité pluriannuel structuré et réaliste.",
+  },
+  resilience: {
+    title: "Résilience & Continuité d’Activité (PCA / PRA) | YASEE",
+    description:
+      "Préparez votre organisation aux incidents majeurs et rançongiciels : plans de continuité d’activité (PCA), plans de reprise (PRA) et gestion de crise.",
+  },
+  "rssi-externalise": {
+    title: "RSSI Externalisé & Pilotage de la Sécurité à Abidjan | YASEE",
+    description:
+      "Bénéficiez des compétences d’un Responsable de la Sécurité des Systèmes d’Information à temps partagé sans recruter à plein temps.",
+  },
+  "tests-intrusion": {
+    title: "Tests d’Intrusion & Évaluation Technique (Pentest) | YASEE",
+    description:
+      "Évaluez la résistance réelle de vos applications, APIs et infrastructures face aux attaquants avec des tests d’intrusion méthodiques et éthiques.",
+  },
+  formation: {
+    title: "Formation Certifiante & Personnalisée en Cybersécurité | YASEE",
+    description:
+      "Programmes certifiants reconnus (ISO 27001, CISM, EBIOS RM) et formations sur mesure pour élever le niveau de vigilance et de compétence de vos équipes.",
+  },
+  "a-propos": {
+    title: "Qui sommes-nous — Cabinet YASEE Cybersécurité | Abidjan",
+    description:
+      "Découvrez le cabinet YASEE Cybersécurité, cabinet indépendant de conseil, audit et résilience cyber pour les entreprises et institutions en Côte d’Ivoire.",
+  },
+  contact: {
+    title: "Contacter YASEE Cybersécurité | Demande de Cadrage & Rendez-vous",
+    description:
+      "Contactez nos consultants à Abidjan pour planifier un diagnostic de cybersécurité ou un premier échange confidentiel sans engagement.",
+  },
+};
+
 type ServicePageData = {
   id: ViewId;
   category: "Votre premier pas" | "Nos domaines" | "Autres services";
@@ -480,17 +539,71 @@ const CORE_DOMAIN_IDS: ViewId[] = ["audit", "strategie", "resilience", "rssi-ext
 const OTHER_SERVICE_IDS: ViewId[] = ["tests-intrusion", "formation"];
 
 const maturityLevels = [
-  { level: 1, name: "Initial", desc: "aucune règle formalisée" },
-  { level: 2, name: "Réactif", desc: "on agit après l’incident" },
-  { level: 3, name: "Structuré", desc: "règles et responsabilités définies" },
-  { level: 4, name: "Maîtrisé", desc: "risques suivis et mesurés" },
-  { level: 5, name: "Optimisé", desc: "amélioration continue" },
+  {
+    level: 1,
+    name: "Initial",
+    desc: "aucune règle formalisée",
+    diagnosticRealite:
+      "La sécurité dépend uniquement de la bonne volonté des collaborateurs. Mots de passe partagés, pas d’inventaire du parc informatique, sauvegardes irrégulières non isolées du réseau.",
+    risqueMajeur:
+      "Vulnérabilité totale aux rançongiciels et fraudes au virement avec arrêt immédiat et durable de l’activité sans certitude de restauration.",
+    premierePriorite:
+      "Isoler une sauvegarde immuable déconnectée (hors ligne), activer le double facteur (2FA) sur la messagerie et inventorier les postes critiques.",
+  },
+  {
+    level: 2,
+    name: "Réactif",
+    desc: "on agit après l’incident",
+    diagnosticRealite:
+      "Un antivirus et un pare-feu sont installés, mais la sécurité est traitée uniquement lorsqu’un problème survient. Le prestataire informatique gère la technique sans pilotage des risques métier.",
+    risqueMajeur:
+      "Détection tardive des intrusions (souvent plusieurs semaines après l’accès des attaquants), pertes financières et fuite de données confidentielles.",
+    premierePriorite:
+      "Formaliser les procédures de sauvegarde quotidienne avec test de restauration mensuel et sensibiliser les équipes aux faux ordres de virement.",
+  },
+  {
+    level: 3,
+    name: "Structuré",
+    desc: "règles et responsabilités définies",
+    diagnosticRealite:
+      "Une charte informatique existe, les droits d’accès sont attribués selon les rôles (RBAC), les sauvegardes sont testées et un référent de sécurité est identifié.",
+    risqueMajeur:
+      "Dérives potentielles en cas de turnover des équipes ou de changement technologique sans mise à jour régulière des procédures.",
+    premierePriorite:
+      "Formaliser le Plan de Continuité d’Activité (PCA) et conduire un premier audit de conformité avec revue semestrielle des habilitations.",
+  },
+  {
+    level: 4,
+    name: "Maîtrisé",
+    desc: "risques suivis et mesurés",
+    diagnosticRealite:
+      "Les risques cyber sont quantifiés et suivis en comité de direction. Des indicateurs clés (KRI / KPI) sont partagés et les prestataires font l’objet de clauses de sécurité contractuelles.",
+    risqueMajeur:
+      "Attaques ciblées avancées exploitant la chaîne logistique (fournisseurs et partenaires tiers connectés à votre système).",
+    premierePriorite:
+      "Tester la résilience par des exercices de simulation de crise annuels et des tests d’intrusion (pentest) périodiques sur les applications exposées.",
+  },
+  {
+    level: 5,
+    name: "Optimisé",
+    desc: "amélioration continue",
+    diagnosticRealite:
+      "Culture de sécurité partagée du comité de direction jusqu’aux stagiaires. La sécurité est un facteur de confiance commerciale et un levier d’obtention de marchés régionaux et internationaux.",
+    risqueMajeur:
+      "Excès de confiance face à l’évolution rapide des menaces liées à l’IA et aux nouvelles technologies de contournement.",
+    premierePriorite:
+      "Maintien de la veille sur les vulnérabilités émergentes, audits de certification ISO/IEC 27001 et alignement proactif sur les nouvelles régulations.",
+  },
 ];
 
 const risks = [
   {
     title: "Arrêt d’activité",
     text: "Systèmes bloqués, ventes et services interrompus pendant des jours.",
+  },
+  {
+    title: "Perte de données",
+    text: "Fichiers clients effacés, bases corrompues ou fuite d’informations confidentielles.",
   },
   {
     title: "Pertes financières",
@@ -510,7 +623,7 @@ const differentiators = [
   {
     num: "01",
     title: "Spécialisés",
-    text: "La cybersécurité est notre seul métier : gouvernance, risques, conformité et résilience.",
+    text: "La cybersécurité est notre métier : gouvernance, risques, conformité et résilience.",
   },
   {
     num: "02",
@@ -692,7 +805,7 @@ export default function Home() {
   const [activeMaturity, setActiveMaturity] = useState(3);
   const [wordIndex, setWordIndex] = useState(0);
 
-  /* État du formulaire de contact (fidèle à YASEE Cybersécurité.html) */
+  /* État du formulaire de contact fiabilisé & professionnel */
   const [nom, setNom] = useState("");
   const [ent, setEnt] = useState("");
   const [mail, setMail] = useState("");
@@ -702,11 +815,23 @@ export default function Home() {
     "Diagnostic & feuille de route",
   ]);
   const [msg, setMsg] = useState("");
-  const [formError, setFormError] = useState(false);
+  const [botCheck, setBotCheck] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<{ nom?: string; ent?: string; mail?: string }>({});
+  const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success">("idle");
   const [recapText, setRecapText] = useState<string | null>(null);
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
   usePageMotion(currentView);
+
+  /* Synchronisation SEO dynamique (Titre & Meta Description par route) */
+  useEffect(() => {
+    const meta = VIEW_METADATA[currentView] || VIEW_METADATA.accueil;
+    document.title = meta.title;
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute("content", meta.description);
+    }
+  }, [currentView]);
 
   useEffect(() => {
     const nextView = resolveCurrentView(location);
@@ -767,14 +892,31 @@ export default function Home() {
 
   const handleContactSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (botCheck) return; // Honeypot anti-spam
+
     const cleanNom = nom.trim();
     const cleanEnt = ent.trim();
     const cleanMail = mail.trim();
-    if (!cleanNom || !cleanEnt || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(cleanMail)) {
-      setFormError(true);
+    const errors: { nom?: string; ent?: string; mail?: string } = {};
+
+    if (!cleanNom) {
+      errors.nom = "Veuillez renseigner votre nom et prénom.";
+    }
+    if (!cleanEnt) {
+      errors.ent = "Veuillez indiquer le nom de votre organisation.";
+    }
+    if (!cleanMail || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(cleanMail)) {
+      errors.mail = "Veuillez renseigner une adresse e-mail professionnelle valide.";
+    }
+
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
       return;
     }
-    setFormError(false);
+
+    setFieldErrors({});
+    setFormStatus("submitting");
+
     const recap =
       `Demande de contact – YASEE Cybersécurité\n\n` +
       `Nom : ${cleanNom}\n` +
@@ -784,11 +926,232 @@ export default function Home() {
       `Ville : ${ville.trim() || "—"}\n` +
       `Intérêt : ${selectedInterests.join(", ") || "—"}\n\n` +
       `Message :\n${msg.trim() || "—"}`;
-    setRecapText(recap);
+
+    setTimeout(() => {
+      setRecapText(recap);
+      setFormStatus("success");
+    }, 600);
   };
 
   const isServicesActive =
     currentView === "services" || SERVICE_VIEWS.includes(currentView);
+
+  /* Illustrations vectorielles techniques personnalisées pour chaque service (Fin du template IA) */
+  const renderTechnicalHeroGraphic = (serviceId: ViewId) => {
+    switch (serviceId) {
+      case "diagnostic":
+        return (
+          <div className="sp-hero-tech-visual">
+            <div className="tech-visual-header">
+              <span>Radar de maturité YASEE</span>
+              <span className="tech-badge-pill">5 Niveaux</span>
+            </div>
+            <div className="tech-radar-bars">
+              {[
+                { label: "Gouvernance & Politiques", cur: 40, target: 80 },
+                { label: "Sauvegardes & Continuité", cur: 55, target: 90 },
+                { label: "Contrôle des Accès & SI", cur: 30, target: 75 },
+                { label: "Sensibilisation Équipes", cur: 20, target: 70 },
+                { label: "Gestion des Prestataires", cur: 45, target: 85 },
+              ].map((item) => (
+                <div key={item.label} className="tech-bar-row">
+                  <div className="tech-bar-label">
+                    <span>{item.label}</span>
+                    <span className="tech-bar-vals">
+                      <small>Actuel</small> <strong>{item.cur}%</strong> → <small>Cible</small> <em>{item.target}%</em>
+                    </span>
+                  </div>
+                  <div className="tech-bar-track">
+                    <div className="tech-bar-fill-target" style={{ width: `${item.target}%` }} />
+                    <div className="tech-bar-fill-cur" style={{ width: `${item.cur}%` }} />
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="tech-visual-footer">
+              <span className="tech-footer-legend">
+                <span className="dot dot-cur" /> Situation constatée
+              </span>
+              <span className="tech-footer-legend">
+                <span className="dot dot-target" /> Trajectoire 90j
+              </span>
+            </div>
+          </div>
+        );
+
+      case "audit":
+        return (
+          <div className="sp-hero-tech-visual">
+            <div className="tech-visual-header">
+              <span>Matrice de conformité & risques</span>
+              <span className="tech-badge-pill">RGSSI / ISO 27001</span>
+            </div>
+            <div className="tech-audit-grid">
+              <div className="audit-stat-box crit">
+                <strong>02</strong>
+                <span>Écarts critiques</span>
+              </div>
+              <div className="audit-stat-box maj">
+                <strong>04</strong>
+                <span>Écarts majeurs</span>
+              </div>
+              <div className="audit-stat-box conf">
+                <strong>18</strong>
+                <span>Points conformes</span>
+              </div>
+            </div>
+            <div className="audit-flow-steps">
+              <div className="audit-flow-step">1. Examen des preuves documentaires & techniques</div>
+              <div className="audit-flow-step">2. Entretiens avec les référents métiers & DSI</div>
+              <div className="audit-flow-step">3. Rapport de synthèse décisionnel pour la DG</div>
+            </div>
+          </div>
+        );
+
+      case "strategie":
+        return (
+          <div className="sp-hero-tech-visual">
+            <div className="tech-visual-header">
+              <span>Gouvernance & feuille de route</span>
+              <span className="tech-badge-pill">Plan 90 Jours</span>
+            </div>
+            <div className="tech-milestones-list">
+              <div className="tech-milestone-item">
+                <span className="milestone-badge">J0 - J30</span>
+                <div>
+                  <strong>Sécurisation d’urgence</strong>
+                  <p>Sauvegardes étanches, double authentification (2FA) sur accès critiques.</p>
+                </div>
+              </div>
+              <div className="tech-milestone-item">
+                <span className="milestone-badge">J30 - J60</span>
+                <div>
+                  <strong>Structuration & règles</strong>
+                  <p>Charte informatique, gestion des habilitations, conformité RGSSI.</p>
+                </div>
+              </div>
+              <div className="tech-milestone-item">
+                <span className="milestone-badge">J60 - J90</span>
+                <div>
+                  <strong>Pérennisation & tableau de bord</strong>
+                  <p>Indicateurs de suivi pour le Conseil d’Administration et la Direction Générale.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+
+      case "resilience":
+        return (
+          <div className="sp-hero-tech-visual">
+            <div className="tech-visual-header">
+              <span>Chaîne de résilience opérationnelle</span>
+              <span className="tech-badge-pill">PCA & PRA</span>
+            </div>
+            <div className="tech-resilience-loop">
+              <div className="resilience-node">
+                <span className="node-num">01</span>
+                <strong>BIA (Impact)</strong>
+                <small>Processus vitaux</small>
+              </div>
+              <span className="resilience-arrow">→</span>
+              <div className="resilience-node">
+                <span className="node-num">02</span>
+                <strong>RTO / RPO</strong>
+                <small>Durée max d’arrêt</small>
+              </div>
+              <span className="resilience-arrow">→</span>
+              <div className="resilience-node">
+                <span className="node-num">03</span>
+                <strong>Plans testés</strong>
+                <small>Exercices de crise</small>
+              </div>
+            </div>
+          </div>
+        );
+
+      case "rssi-externalise":
+        return (
+          <div className="sp-hero-tech-visual">
+            <div className="tech-visual-header">
+              <span>Modèle de pilotage délégué</span>
+              <span className="tech-badge-pill">Temps Partagé</span>
+            </div>
+            <div className="tech-rssi-triad">
+              <div className="triad-card">
+                <strong>Direction Générale</strong>
+                <small>Validation des priorités & arbitrages budgétaires</small>
+              </div>
+              <div className="triad-center">
+                <div className="triad-core">
+                  <span>RSSI YASEE</span>
+                  <small>Conseil & Pilotage neutre</small>
+                </div>
+              </div>
+              <div className="triad-card">
+                <strong>Équipes IT & Prestataires</strong>
+                <small>Mise en œuvre technique & suivi d’exploitation</small>
+              </div>
+            </div>
+          </div>
+        );
+
+      case "tests-intrusion":
+        return (
+          <div className="sp-hero-tech-visual">
+            <div className="tech-visual-header">
+              <span>Périmètre des tests d’intrusion</span>
+              <span className="tech-badge-pill">Méthode OWASP</span>
+            </div>
+            <div className="tech-pentest-targets">
+              <div className="pentest-target-pill">Applications Web & Portails</div>
+              <div className="pentest-target-pill">APIs & Services Cloud</div>
+              <div className="pentest-target-pill">Réseau interne & VPN</div>
+              <div className="pentest-target-pill">Phishing & Facteur humain</div>
+            </div>
+            <div className="pentest-guarantee">
+              <ShieldCheck size={16} /> Tests 100% éthiques, sous accord de confidentialité et sans perturbation de votre production.
+            </div>
+          </div>
+        );
+
+      case "formation":
+        return (
+          <div className="sp-hero-tech-visual">
+            <div className="tech-visual-header">
+              <span>Parcours de montée en compétences</span>
+              <span className="tech-badge-pill">Accrédité PECB / PMI</span>
+            </div>
+            <div className="tech-milestones-list">
+              <div className="tech-milestone-item">
+                <span className="milestone-badge">Niveau 1</span>
+                <div>
+                  <strong>Sensibilisation générale</strong>
+                  <p>Réflexes anti-phishing, protection des mots de passe et signalement d’incident.</p>
+                </div>
+              </div>
+              <div className="tech-milestone-item">
+                <span className="milestone-badge">Niveau 2</span>
+                <div>
+                  <strong>Formations techniques</strong>
+                  <p>Administration système sécurisée, durcissement et bonnes pratiques réseau.</p>
+                </div>
+              </div>
+              <div className="tech-milestone-item">
+                <span className="milestone-badge">Niveau 3</span>
+                <div>
+                  <strong>Certifications reconnues</strong>
+                  <p>Préparation aux examens CISM, PMP et ISO/IEC 27001 Lead Implementer.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+
+      default:
+        return null;
+    }
+  };
 
   /* =========================================================================
      RENDU D'UNE PAGE SERVICE DÉTAILLÉE (7 pages : Diagnostic, Audit, Stratégie,
@@ -804,60 +1167,53 @@ export default function Home() {
 
     return (
       <div className="page-view" key={service.id}>
-        {/* Hero éditorial atmosphérique avec découpe cambrée façon Aegis */}
-        <section className="sp-hero-aegis">
-          <div className="hero-bg" aria-hidden="true">
-            <img src="/hero-team.jpg" alt="" className="hero-photo" />
-            <div className="hero-overlay" />
-          </div>
+        {/* Hero technique architectural propre et différencié par service (Plus de photo répétée) */}
+        <section className="sp-hero-tech">
+          <div className="container sp-hero-tech-grid">
+            <div className="sp-hero-tech-content reveal">
+              <nav className="crumb-aegis" aria-label="Fil d’Ariane">
+                <a
+                  href="/services"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigateTo("services");
+                  }}
+                >
+                  Nos services
+                </a>
+                <span aria-hidden="true">/</span>
+                <span>{service.category}</span>
+              </nav>
 
-          <div className="container sp-hero-inner reveal">
-            <nav className="crumb-aegis" aria-label="Fil d’Ariane">
-              <a
-                href="/services"
-                onClick={(e) => {
-                  e.preventDefault();
-                  navigateTo("services");
-                }}
-              >
-                Nos services
-              </a>
-              <span aria-hidden="true">/</span>
-              <span>{service.category}</span>
-            </nav>
+              <h1>{service.title}</h1>
+              <p className="sp-hero-lead">{service.lead}</p>
 
-            <h1>{service.title}</h1>
-            <p className="sp-hero-lead">{service.lead}</p>
-
-            <div className="hero-buttons">
-              <a
-                className="btn-pill btn-primary"
-                href={serviceWhatsAppUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Demander un échange
-              </a>
-              <a
-                className="btn-pill btn-outline-light"
-                href="/services"
-                onClick={(e) => {
-                  e.preventDefault();
-                  navigateTo("services");
-                }}
-              >
-                Tous nos services
-              </a>
+              <div className="hero-buttons">
+                <a
+                  className="btn-pill btn-primary"
+                  href="/contact"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigateTo("contact", service.title);
+                  }}
+                >
+                  Demander un cadrage
+                </a>
+                <a
+                  className="btn-pill btn-outline-light"
+                  href={serviceWhatsAppUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <MessageCircle size={16} />
+                  <span>Échanger sur WhatsApp</span>
+                </a>
+              </div>
             </div>
-          </div>
 
-          <div className="section-cut cut-bottom" aria-hidden="true">
-            <svg viewBox="0 0 1440 110" fill="none" preserveAspectRatio="none">
-              <path
-                d="M0 110 L0 92 L960 14 Q1035 6 1110 20 L1440 74 L1440 110 Z"
-                fill="#ffffff"
-              />
-            </svg>
+            <div className="sp-hero-tech-graphic reveal reveal-delay-2">
+              {renderTechnicalHeroGraphic(service.id)}
+            </div>
           </div>
         </section>
 
@@ -1059,6 +1415,11 @@ export default function Home() {
 
   return (
     <div className="site-shell">
+      {/* Lien d'évitement pour l'accessibilité clavier */}
+      <a href="#main-content" className="skip-link">
+        Aller au contenu principal
+      </a>
+
       {/* =====================================================================
           HEADER COLLANT — Navigation multi-pages + WhatsApp derrière le numéro
          ===================================================================== */}
@@ -1234,7 +1595,7 @@ export default function Home() {
         </div>
       </header>
 
-      <main>
+      <main id="main-content" tabIndex={-1}>
         {/* ===================================================================
             VUE 1 : ACCUEIL (#accueil)
            =================================================================== */}
@@ -1275,21 +1636,33 @@ export default function Home() {
                   <div className="hero-buttons">
                     <a
                       className="btn-pill btn-primary"
-                      href={WHATSAPP_DIAGNOSTIC_URL}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      href="/contact"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        navigateTo("contact", "Diagnostic & feuille de route");
+                      }}
                     >
                       Demander un diagnostic
                     </a>
                     <a
                       className="btn-pill btn-outline-light"
+                      href={WHATSAPP_DIAGNOSTIC_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <MessageCircle size={16} />
+                      <span>WhatsApp direct</span>
+                    </a>
+                    <a
+                      className="text-arrow-link"
+                      style={{ color: "rgba(255, 255, 255, 0.9)", padding: "12px 6px" }}
                       href="/services"
                       onClick={(e) => {
                         e.preventDefault();
                         navigateTo("services");
                       }}
                     >
-                      Découvrir nos services
+                      Découvrir nos services <ArrowRight size={15} />
                     </a>
                   </div>
                 </div>
@@ -1398,15 +1771,19 @@ export default function Home() {
 
               <div className="container">
                 <div className="centered-intro reveal">
-                  <span className="eyebrow">Pourquoi la cybersécurité vous concerne</span>
                   <h2>
-                    Une attaque ne coûte pas{" "}
-                    <span className="marker-bar">seulement des données.</span>
+                    Pourquoi la cybersécurité{" "}
+                    <span className="marker-bar">vous concerne</span>
                   </h2>
                   <p>
-                    La cybersécurité protège vos ordinateurs, vos logiciels et vos données contre le vol, la fraude ou
-                    le blocage. Faux e-mails, fraudes au virement, rançongiciels : ces attaques ne visent plus
-                    seulement les grandes entreprises.
+                    Aujourd’hui, votre entreprise s’appuie sur ses outils numériques, ses données et ses systèmes
+                    d’information pour fonctionner, servir ses clients et développer ses activités. Une cyberattaque,
+                    une fraude ou une interruption de ces outils peut rapidement perturber vos opérations, entraîner
+                    des pertes financières et fragiliser la confiance de vos clients et partenaires.
+                  </p>
+                  <p className="intro-takeaway">
+                    <strong>La cybersécurité est donc un enjeu business :</strong> protéger votre activité, maîtriser
+                    vos risques et préserver la pérennité de votre entreprise relèvent aussi de votre responsabilité.
                   </p>
                 </div>
 
@@ -1428,7 +1805,7 @@ export default function Home() {
 
                 <div className="indep-comparison reveal">
                   <div className="indep-head">
-                    <span className="eyebrow">Un conseil indépendant</span>
+                    <span className="eyebrow">Un conseiller indépendant</span>
                     <h3>Nous ne vendons ni logiciel, ni matériel.</h3>
                     <p>
                       Nos recommandations servent uniquement vos intérêts. Vous gardez le choix de vos solutions et de
@@ -1507,9 +1884,11 @@ export default function Home() {
                     return (
                       <button
                         key={lvl.level}
+                        id={`tab-maturity-${lvl.level}`}
                         type="button"
                         role="tab"
                         aria-selected={active}
+                        aria-controls="maturity-panel"
                         className={`maturity-step-card ${active ? "is-active" : ""}`}
                         onClick={() => setActiveMaturity(lvl.level)}
                       >
@@ -1520,6 +1899,59 @@ export default function Home() {
                     );
                   })}
                 </div>
+
+                {/* Panneau de détails interactif (Conforme Accessibilité ARIA WCAG 2.2) */}
+                {(() => {
+                  const currentMaturityData = maturityLevels.find((m) => m.level === activeMaturity);
+                  if (!currentMaturityData) return null;
+                  return (
+                    <div
+                      id="maturity-panel"
+                      role="tabpanel"
+                      aria-labelledby={`tab-maturity-${activeMaturity}`}
+                      className="maturity-detail-panel reveal"
+                    >
+                      <div className="mat-detail-head">
+                        <div>
+                          <strong style={{ fontSize: "1.2rem", color: "#ffffff" }}>
+                            Niveau 0{currentMaturityData.level} — {currentMaturityData.name}
+                          </strong>
+                          <span style={{ display: "block", color: "rgba(255, 255, 255, 0.7)", fontSize: "0.86rem", marginTop: "2px" }}>
+                            {currentMaturityData.desc}
+                          </span>
+                        </div>
+                        <span className="mat-detail-badge">Repère YASEE</span>
+                      </div>
+
+                      <div className="mat-detail-grid">
+                        <div className="mat-detail-col">
+                          <h4>Constat sur le terrain</h4>
+                          <p>{currentMaturityData.diagnosticRealite}</p>
+                          <div style={{ marginTop: "14px" }}>
+                            <h4 style={{ color: "#ef4444" }}>Risque majeur pour l’organisation</h4>
+                            <p style={{ color: "rgba(255, 255, 255, 0.82)" }}>{currentMaturityData.risqueMajeur}</p>
+                          </div>
+                        </div>
+
+                        <div className="mat-detail-col" style={{ background: "rgba(34, 168, 59, 0.08)", border: "1px solid rgba(189, 247, 85, 0.25)", borderRadius: "12px", padding: "18px 20px" }}>
+                          <h4 style={{ color: "var(--yasee-lime)" }}>Priorité d’action recommandée</h4>
+                          <p style={{ color: "#ffffff", fontWeight: 600 }}>{currentMaturityData.premierePriorite}</p>
+                          <a
+                            href="/diagnostic"
+                            className="text-arrow-link"
+                            style={{ marginTop: "16px", color: "var(--yasee-lime)" }}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              navigateTo("diagnostic");
+                            }}
+                          >
+                            Évaluer précisément votre niveau →
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })()}
 
                 <p className="maturity-footnote reveal">
                   Indicateur interne d’accompagnement, distinct d’une certification officielle.{" "}
@@ -1534,18 +1966,6 @@ export default function Home() {
                     En savoir plus sur le diagnostic →
                   </a>
                 </p>
-
-                <div className="stats-strip reveal">
-                  {stats.map((st) => (
-                    <div key={st.label} className="stat-cell">
-                      <div className="stat-val">
-                        <span data-counter={st.value}>{st.value}</span>
-                        <em>{st.suffix}</em>
-                      </div>
-                      <p>{st.label}</p>
-                    </div>
-                  ))}
-                </div>
               </div>
 
               <div className="section-cut cut-bottom" aria-hidden="true">
@@ -1568,7 +1988,6 @@ export default function Home() {
                   </div>
 
                   <div className="why-copy reveal reveal-delay-2">
-                    <span className="eyebrow">Pourquoi YASEE</span>
                     <h2>
                       Ce qui nous <span className="marker-bar">distingue</span>
                     </h2>
@@ -1618,7 +2037,7 @@ export default function Home() {
                 </div>
 
                 <div className="certs-block reveal">
-                  <span className="eyebrow">Nos certifications</span>
+                  <span className="eyebrow">Nos certifications accréditées</span>
                   <div className="certs-row">
                     {certifications.map((cert) => (
                       <span key={cert} className="cert-tag">
@@ -1643,20 +2062,22 @@ export default function Home() {
                 <div className="cta-band-buttons">
                   <a
                     className="btn-pill btn-white-green"
-                    href={WHATSAPP_DIAGNOSTIC_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="/contact"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      navigateTo("contact", "Diagnostic & feuille de route");
+                    }}
                   >
                     Demander un diagnostic
                   </a>
                   <a
                     className="btn-pill btn-outline-light"
-                    href={WHATSAPP_URL}
+                    href={WHATSAPP_DIAGNOSTIC_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     <MessageCircle size={16} />
-                    <span>WhatsApp (+225) 07 11 444 588</span>
+                    <span>WhatsApp direct</span>
                   </a>
                 </div>
               </div>
@@ -1931,7 +2352,7 @@ export default function Home() {
                 </div>
 
                 <div className="certs-block reveal">
-                  <span className="eyebrow">Nos certifications</span>
+                  <span className="eyebrow">Nos certifications accréditées</span>
                   <div className="certs-row">
                     {certifications.map((cert) => (
                       <span key={cert} className="cert-tag">
@@ -2078,56 +2499,80 @@ export default function Home() {
                     </div>
                   </div>
 
-                  {/* Colonne droite : Formulaire complet & épuré */}
+                  {/* Colonne droite : Formulaire complet & fiabilisé B2B */}
                   <div className="contact-card-col reveal reveal-delay-2">
-                    {recapText ? (
+                    {formStatus === "success" && recapText ? (
                       <div className="contact-success" role="status" aria-live="polite">
-                        <div className="success-circle">
-                          <Check size={26} />
+                        <div className="success-circle" style={{ background: "rgba(34, 168, 59, 0.15)", color: "var(--yasee-green)" }}>
+                          <Check size={28} strokeWidth={2.5} />
                         </div>
-                        <h3>Votre demande est prête</h3>
-                        <p>
-                          Vous pouvez envoyer ce récapitulatif directement sur notre WhatsApp en un clic, par e-mail à{" "}
-                          <strong>info@yasee-it.ci</strong>, ou le copier.
+                        <h3>Demande enregistrée avec succès</h3>
+                        <p style={{ color: "var(--ink-700)", lineHeight: "1.65" }}>
+                          Merci pour votre confiance. Un consultant senior YASEE Cybersécurité étudie votre situation et prendra contact avec vous sous <strong>24 heures ouvrées</strong> pour convenir d’un premier échange de cadrage confidentiel.
                         </p>
-                        <textarea
-                          className="recap-textarea"
-                          value={recapText}
-                          readOnly
-                          rows={8}
-                        />
+
+                        <div style={{ marginTop: "18px", marginBottom: "18px" }}>
+                          <span style={{ fontSize: "0.78rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", color: "#64748b" }}>
+                            Récapitulatif de votre demande :
+                          </span>
+                          <textarea
+                            className="recap-textarea"
+                            value={recapText}
+                            readOnly
+                            rows={7}
+                            style={{ marginTop: "6px" }}
+                          />
+                        </div>
+
                         <div className="recap-actions">
                           <a
                             href={`https://wa.me/2250711444588?text=${encodeURIComponent(recapText)}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="btn-pill btn-primary"
+                            className="btn-pill btn-outline-light"
+                            style={{ borderColor: "var(--yasee-green)", color: "var(--ink-900)" }}
                           >
                             <MessageCircle size={16} />
-                            <span>Envoyer sur WhatsApp</span>
+                            <span>Accélérer sur WhatsApp (Optionnel)</span>
                           </a>
                           <button
                             type="button"
-                            className="btn-pill btn-secondary-dark"
+                            className="copy-mini-btn"
+                            style={{ padding: "10px 16px", borderRadius: "999px", background: "#f1f5f9", color: "var(--ink-900)", border: "1px solid #cbd5e1" }}
                             onClick={() => copyToClipboard(recapText, "recap")}
                           >
-                            <Copy size={15} />
+                            <Copy size={14} />
                             <span>
-                              {copiedKey === "recap" ? "Récapitulatif copié !" : "Copier le récapitulatif"}
+                              {copiedKey === "recap" ? "Copié !" : "Copier le récapitulatif"}
                             </span>
                           </button>
                           <button
                             type="button"
                             className="text-reset-btn"
-                            onClick={() => setRecapText(null)}
+                            onClick={() => {
+                              setFormStatus("idle");
+                              setRecapText(null);
+                            }}
                           >
-                            Modifier la demande
+                            Envoyer une autre demande
                           </button>
                         </div>
                       </div>
                     ) : (
                       <form className="clean-form" onSubmit={handleContactSubmit} noValidate>
-                        <h3>Envoyez-nous votre demande</h3>
+                        {/* Honeypot invisible contre les robots spams */}
+                        <input
+                          type="text"
+                          name="bot_field_check"
+                          tabIndex={-1}
+                          autoComplete="off"
+                          className="hidden-hp"
+                          value={botCheck}
+                          onChange={(e) => setBotCheck(e.target.value)}
+                          aria-hidden="true"
+                        />
+
+                        <h3>Transmettre une demande de cadrage</h3>
 
                         <div className="clean-form-row">
                           <label htmlFor="f-nom">
@@ -2136,23 +2581,42 @@ export default function Home() {
                               id="f-nom"
                               type="text"
                               autoComplete="name"
+                              className={fieldErrors.nom ? "input-error" : ""}
                               value={nom}
-                              onChange={(e) => setNom(e.target.value)}
+                              onChange={(e) => {
+                                setNom(e.target.value);
+                                if (fieldErrors.nom) setFieldErrors((prev) => ({ ...prev, nom: undefined }));
+                              }}
                               placeholder="Votre nom et prénom"
+                              aria-invalid={!!fieldErrors.nom}
+                              aria-describedby={fieldErrors.nom ? "err-nom" : undefined}
                               required
                             />
+                            {fieldErrors.nom && (
+                              <span id="err-nom" className="field-error-hint">{fieldErrors.nom}</span>
+                            )}
                           </label>
+
                           <label htmlFor="f-ent">
-                            Entreprise *
+                            Organisation / Entreprise *
                             <input
                               id="f-ent"
                               type="text"
                               autoComplete="organization"
+                              className={fieldErrors.ent ? "input-error" : ""}
                               value={ent}
-                              onChange={(e) => setEnt(e.target.value)}
+                              onChange={(e) => {
+                                setEnt(e.target.value);
+                                if (fieldErrors.ent) setFieldErrors((prev) => ({ ...prev, ent: undefined }));
+                              }}
                               placeholder="Nom de votre organisation"
+                              aria-invalid={!!fieldErrors.ent}
+                              aria-describedby={fieldErrors.ent ? "err-ent" : undefined}
                               required
                             />
+                            {fieldErrors.ent && (
+                              <span id="err-ent" className="field-error-hint">{fieldErrors.ent}</span>
+                            )}
                           </label>
                         </div>
 
@@ -2163,12 +2627,22 @@ export default function Home() {
                               id="f-mail"
                               type="email"
                               autoComplete="email"
+                              className={fieldErrors.mail ? "input-error" : ""}
                               value={mail}
-                              onChange={(e) => setMail(e.target.value)}
+                              onChange={(e) => {
+                                setMail(e.target.value);
+                                if (fieldErrors.mail) setFieldErrors((prev) => ({ ...prev, mail: undefined }));
+                              }}
                               placeholder="vous@entreprise.ci"
+                              aria-invalid={!!fieldErrors.mail}
+                              aria-describedby={fieldErrors.mail ? "err-mail" : undefined}
                               required
                             />
+                            {fieldErrors.mail && (
+                              <span id="err-mail" className="field-error-hint">{fieldErrors.mail}</span>
+                            )}
                           </label>
+
                           <label htmlFor="f-tel">
                             Téléphone / WhatsApp
                             <input
@@ -2183,18 +2657,18 @@ export default function Home() {
                         </div>
 
                         <label htmlFor="f-ville">
-                          Ville
+                          Ville d’intervention
                           <input
                             id="f-ville"
                             type="text"
                             value={ville}
                             onChange={(e) => setVille(e.target.value)}
-                            placeholder="Abidjan, Bouaké, San Pedro…"
+                            placeholder="Abidjan, Bouaké, San Pedro, International…"
                           />
                         </label>
 
                         <div className="interests-group">
-                          <span className="interests-label">Ce qui vous intéresse</span>
+                          <span className="interests-label">Domaine ou service recherché</span>
                           <div className="interests-chips">
                             {contactInterests.map((item) => {
                               const active = selectedInterests.includes(item);
@@ -2215,28 +2689,33 @@ export default function Home() {
                         </div>
 
                         <label htmlFor="f-msg">
-                          Votre message
+                          Votre contexte / objectifs
                           <textarea
                             id="f-msg"
                             rows={4}
                             value={msg}
                             onChange={(e) => setMsg(e.target.value)}
-                            placeholder="Votre activité, votre besoin, vos échéances…"
+                            placeholder="Décrivez votre activité, vos échéances, ou un besoin particulier (audit, rançongiciel, conformité)…"
                           />
                         </label>
 
-                        {formError && (
-                          <p className="form-err-msg" role="alert">
-                            Merci d’indiquer votre nom, votre entreprise et une adresse e-mail valide.
-                          </p>
-                        )}
-
-                        <button type="submit" className="btn-pill btn-primary clean-submit">
-                          Envoyer ma demande <Send size={15} />
+                        <button
+                          type="submit"
+                          className="btn-pill btn-primary clean-submit"
+                          disabled={formStatus === "submitting"}
+                        >
+                          {formStatus === "submitting" ? (
+                            <>Transmission en cours... <RefreshCw size={15} style={{ animation: "spin 1s linear infinite" }} /></>
+                          ) : (
+                            <>Envoyer ma demande de cadrage <Send size={15} /></>
+                          )}
                         </button>
 
                         <p className="clean-form-note">
-                          <ShieldCheck size={15} /> Échange strictement confidentiel et sans engagement.
+                          <ShieldCheck size={15} /> Échange strictement confidentiel, couvert par le secret professionnel.
+                        </p>
+                        <p className="form-privacy-note">
+                          Vos coordonnées restent strictement confidentielles et ne sont jamais cédées ni partagées à des éditeurs de logiciels tiers (conformité loi n° 2013-450 sur la protection des données en Côte d’Ivoire).
                         </p>
                       </form>
                     )}
